@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d413e6110d7e7a34092d442c39cb13fd
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - peashooterPrefab: {fileID: 5748261580127547971, guid: 91a07f8ef8354914d82ba4c523725d27, type: 3}
+  - sunflowerPrefab: {instanceID: 0}
+  - wallnutPrefab: {instanceID: 0}
+  - iceshooterPrefab: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

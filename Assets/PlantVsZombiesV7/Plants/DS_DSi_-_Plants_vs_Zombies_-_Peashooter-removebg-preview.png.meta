@@ -1,0 +1,505 @@
+fileFormatVersion: 2
+guid: 3983fd75ad075f041b1681dda34c91cc
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 154
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d719e6357b93acd4a901fade6ba6c5d3
+      internalID: -1745639126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_1
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 154
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d30cfddcf5dd3754190d9c4b51d94c8b
+      internalID: 652944774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_2
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 154
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6986351707e9bb848adfaeca1eafebbd
+      internalID: 202793543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_3
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 154
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffbe5c2301530314eaf5c3b226f05d71
+      internalID: 2147002871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_4
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 154
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93e12f366ba774d42ac18c32e6629950
+      internalID: -711105409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_5
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 154
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb7191e01fe7ac748960f8e80469d59d
+      internalID: 1426860826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_6
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 154
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b192d45d16faa14183c7976778f8871
+      internalID: -1988659120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_7
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 154
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13491d01c4d144b4faba9f543f64f3de
+      internalID: -1361922471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 123
+        width: 26
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e4d250033e92d84c88f431f2f128004
+      internalID: -555614697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_9
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 123
+        width: 23
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6195b3ebedef797448ec49012d8ac64f
+      internalID: -1651449434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_10
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 123
+        width: 27
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e5638c1ff080854aabe5506b97dbb26
+      internalID: -1146379813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_11
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 133
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 604c7c7d10ef64d41908efe04774c937
+      internalID: -1521447010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_12
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 133
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe4d95aa82e162149a27c1bd0c1bec29
+      internalID: -1635700178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_13
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 131
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c109e5a1eed166541aa1baa7ac549a0a
+      internalID: -571694667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_14
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 127
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae750543b7e62194b864e3a0da604a75
+      internalID: 361129947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_15
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 127
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: daa08e55eb098ff428ea6876a354cdbe
+      internalID: -827046321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_0: -1745639126
+      DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_1: 652944774
+      DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_10: -1146379813
+      DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_11: -1521447010
+      DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_12: -1635700178
+      DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_13: -571694667
+      DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_14: 361129947
+      DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_15: -827046321
+      DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_2: 202793543
+      DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_3: 2147002871
+      DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_4: -711105409
+      DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_5: 1426860826
+      DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_6: -1988659120
+      DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_7: -1361922471
+      DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_8: -555614697
+      DS_DSi_-_Plants_vs_Zombies_-_Peashooter-removebg-preview_9: -1651449434
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

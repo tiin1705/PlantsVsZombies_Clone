@@ -6,6 +6,21 @@ public abstract class Bullet : MonoBehaviour
 {
     [SerializeField] protected float speed;
     [SerializeField] protected int damage;
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
+
+    private void Awake()
+    {
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
+    }
+
+    public virtual void ResetState()
+    {
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
+
+    }
 
     public abstract void Initialize(float bulletSpeed, int bulletDamage);
     public abstract void Fire(Vector2 direction);

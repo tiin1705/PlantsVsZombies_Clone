@@ -14,6 +14,7 @@ public class SunflowerBullet : Bullet
 
     private void Start()
     {
+        
         if(uiSunTarget == null)
         {
             GameObject sunDummy = GameObject.Find("SunDummyTarget");
@@ -23,9 +24,15 @@ public class SunflowerBullet : Bullet
             }
             else
             {
-                Debug.LogWarning("SunDummyTarget không được tìm thấy tron scene");
             }
         }
+
+    }
+
+    public override void ResetState()
+    {
+        base.ResetState();
+        isMovingToUI = false;
     }
     public override void Initialize(float bulletSpeed, int bulletDamage)
     {
@@ -91,24 +98,44 @@ public class SunflowerBullet : Bullet
     }
     private void OnMouseDown()
     {
-        isMovingToUI = true;
+
+        if (!isMovingToUI)
+        {
+            isMovingToUI = true;
+
+        }
     }
 
     private void MoveBulletToUI()
     {
         if (uiSunTarget != null)
         {
+            // Chuyển từ không gian thế giới sang màn hình
             Vector3 uiScreenPosition = Camera.main.WorldToScreenPoint(uiSunTarget.position);
-            Vector3 bulletPositionInScreenSpace = new Vector3(uiScreenPosition.x, uiScreenPosition.y, 0f);
-            Vector3 targetWorldPosition = Camera.main.ScreenToWorldPoint(bulletPositionInScreenSpace);
+            // Chuyển lại từ không gian màn hình sang không gian thế giới
+            Vector3 targetWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(uiScreenPosition.x, uiScreenPosition.y, Camera.main.nearClipPlane));
 
+            // Di chuyển viên đạn về phía mục tiêu
             transform.position = Vector3.MoveTowards(transform.position, targetWorldPosition, moveSpeedToUI * Time.deltaTime);
+
+            // Kiểm tra khi viên đạn đã gần đạt đến mục tiêu
             if (Vector3.Distance(transform.position, targetWorldPosition) < 0.1f)
             {
-                SunManager.Instance.AddSun(50);
-                BulletPool.Instance.ReturnBullet(this);
-
+                // Chỉ thu thập Sun khi viên đạn đã đến gần mục tiêu và người chơi đã nhấp vào viên đạn
+                if (isMovingToUI)
+                {
+                    SunManager.Instance.AddSun(50);  // Cộng thêm Sun
+                    BulletPool.Instance.ReturnBullet(this);  // Trả lại viên đạn vào pool
+                }
             }
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Triggered with " + other.gameObject.name);
+        if (other.CompareTag("Sun"))
+        {
+            Debug.Log("Sun picked up: " + other.gameObject.name);
         }
     }
 }

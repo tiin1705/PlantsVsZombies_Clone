@@ -30,7 +30,21 @@ public class SunBehavior : MonoBehaviour
 
     private void OnMouseDown()
     {
-        isMovingToUI = true;
+
+        if (!isMovingToUI)
+        {
+            isMovingToUI = true;
+            Debug.Log("SunBehavior: isMovingToUI = true");
+
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Triggered with " + other.gameObject.name);
+        if (other.CompareTag("Sun"))
+        {
+            Debug.Log("Sun picked up: " + other.gameObject.name);
+        }
     }
 
     private void MoveSunToTarget()

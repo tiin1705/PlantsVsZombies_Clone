@@ -42,23 +42,24 @@ public class BulletPool : MonoBehaviour
     {
         if (bulletPools.ContainsKey(bulletType) && bulletPools[bulletType].Count > 0)
         {
-         //   Debug.Log("Pool Count for " + bulletType + ": " + bulletPools[bulletType].Count);
+            Debug.Log("Pool Count for " + bulletType + ": " + bulletPools[bulletType].Count);
 
             Bullet bullet = bulletPools[bulletType].Dequeue();
             bullet.gameObject.SetActive(true);
-        //    Debug.Log("Bullet retrieved: " + bullet.gameObject.name);
+            Debug.Log("Bullet retrieved: " + bullet.gameObject.name);
 
             return bullet;
         }
         else
         {
-          //  Debug.LogWarning("No bullets available in the pool for type: " + bulletType);
+            Debug.LogWarning("No bullets available in the pool for type: " + bulletType);
             return null;
         }
     }
 
     public void ReturnBullet(Bullet bullet)
     {
+        bullet.ResetState();
         bullet.gameObject.SetActive(false);
         // Tìm kiếm loại viên đạn trong danh sách
         string bulletType = bullet.GetType().Name; // Lấy tên lớp
@@ -66,11 +67,11 @@ public class BulletPool : MonoBehaviour
         if (bulletPools.ContainsKey(bulletType))
         {
             bulletPools[bulletType].Enqueue(bullet); // Trả lại viên đạn vào pool tương ứng
-        //    Debug.Log("Bullet returned to pool: " + bulletType);
+            Debug.Log("Bullet returned to pool: " + bulletType);
             return;
         }
 
-     //   Debug.LogWarning("Bullet type not found in any pool: " + bulletType);
-    }      
+        Debug.LogWarning("Bullet type not found in any pool: " + bulletType);
+    }
 
 }

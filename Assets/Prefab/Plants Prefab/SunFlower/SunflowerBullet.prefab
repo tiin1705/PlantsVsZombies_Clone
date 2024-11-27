@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3279686223077307355}
   - component: {fileID: 6516157525862206520}
   - component: {fileID: 7516219331900336537}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: SunflowerBullet
-  m_TagString: Untagged
+  m_TagString: Sun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,6 +120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530ec057115deeb4583fa7c856b75054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
+  damage: 0
+  uiSunTarget: {fileID: 0}
+  moveSpeedToUI: 25
 --- !u!58 &7516219331900336537
 CircleCollider2D:
   m_ObjectHideFlags: 0

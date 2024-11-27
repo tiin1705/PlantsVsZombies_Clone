@@ -4143,7 +4143,7 @@ MonoBehaviour:
   bulletPrefabs:
   - {fileID: 4195218511246693886, guid: 880fd1c9b3dcd194f952c9e8a9a9b697, type: 3}
   - {fileID: 1460417767971912145, guid: fb986240b0d2c2949bb987dbc95a49fd, type: 3}
-  poolSize: 100
+  poolSize: 50
 --- !u!1 &1705491151
 GameObject:
   m_ObjectHideFlags: 0

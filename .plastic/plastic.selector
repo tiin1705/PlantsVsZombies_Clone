@@ -1,0 +1,4 @@
+repository "PlantsVsZombies_Clone@Tiinizh@cloud"
+  path "/"
+    br "/main"
+    co "/main"

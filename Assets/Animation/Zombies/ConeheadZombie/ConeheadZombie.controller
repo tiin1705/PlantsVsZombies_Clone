@@ -249,12 +249,15 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: health
-    m_EventTreshold: 101
+    m_EventTreshold: 100
   - m_ConditionMode: 1
     m_ConditionEvent: isWalking
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: isWaiting
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: ChangeToNormal
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8013272359363916354}
@@ -280,7 +283,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: health
-    m_EventTreshold: 101
+    m_EventTreshold: 100
   - m_ConditionMode: 2
     m_ConditionEvent: isWalking
     m_EventTreshold: 0
@@ -293,6 +296,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: distanceToTarget
     m_EventTreshold: 1
+  - m_ConditionMode: 1
+    m_ConditionEvent: ChangeToNormal
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1456554689684604948}
   m_Solo: 0
@@ -380,6 +386,12 @@ AnimatorController:
   - m_Name: health
     m_Type: 1
     m_DefaultFloat: 200
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: ChangeToNormal
+    m_Type: 9
+    m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
@@ -487,7 +499,7 @@ BlendTree:
   m_Childs:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 03cee6494c7c45540aca366c909347d2, type: 2}
-    m_Threshold: 134
+    m_Threshold: 105
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -495,7 +507,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 032b9d0b25ed3a442b89c9986cf9fce3, type: 2}
-    m_Threshold: 166
+    m_Threshold: 150
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -503,7 +515,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: b293ccb799b6c954ca3a0cdd11917ae3, type: 2}
-    m_Threshold: 167
+    m_Threshold: 200
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -511,8 +523,8 @@ BlendTree:
     m_Mirror: 0
   m_BlendParameter: health
   m_BlendParameterY: distanceToTarget
-  m_MinThreshold: 134
-  m_MaxThreshold: 167
+  m_MinThreshold: 105
+  m_MaxThreshold: 200
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
@@ -555,6 +567,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: canAttack
     m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: health
+    m_EventTreshold: 100
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2539685796338371997}
   m_Solo: 0
@@ -583,6 +598,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: isWaiting
     m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: health
+    m_EventTreshold: 100
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2539685796338371997}
   m_Solo: 0
@@ -607,7 +625,7 @@ BlendTree:
   m_Childs:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 65a4116d6b73b5841bc192bd3f8297de, type: 2}
-    m_Threshold: 134
+    m_Threshold: 105
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -615,7 +633,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 8beb9201f042ce646913ccd3ccda9d9e, type: 2}
-    m_Threshold: 166
+    m_Threshold: 150
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -623,7 +641,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 049733623ea3d9d42974f3ea0c601cf2, type: 2}
-    m_Threshold: 167
+    m_Threshold: 200
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -631,8 +649,8 @@ BlendTree:
     m_Mirror: 0
   m_BlendParameter: health
   m_BlendParameterY: distanceToTarget
-  m_MinThreshold: 134
-  m_MaxThreshold: 167
+  m_MinThreshold: 105
+  m_MaxThreshold: 200
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
@@ -656,6 +674,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: canAttack
     m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: health
+    m_EventTreshold: 100
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5351504702726447131}
   m_Solo: 0

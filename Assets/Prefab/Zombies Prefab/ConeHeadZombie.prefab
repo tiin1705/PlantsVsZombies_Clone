@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2869010447468501362}
   - component: {fileID: 2698045482713073974}
   - component: {fileID: 8730950568971428374}
-  - component: {fileID: 92011631840342384}
+  - component: {fileID: 4362548764239149358}
   m_Layer: 0
   m_Name: ConeHeadZombie
   m_TagString: Zombie
@@ -182,7 +182,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &92011631840342384
+--- !u!114 &4362548764239149358
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4924822442991245466}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5615bf1cd04d29a47b5c602346243866, type: 3}
+  m_Script: {fileID: 11500000, guid: 26b3a9f1d6ec41b458f3f246316c643f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxhealth: 200

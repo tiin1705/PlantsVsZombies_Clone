@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   zombieSpawner: {fileID: 594785267}
-  preparationTime: 15
+  preparationTime: 2
 --- !u!1 &94205382
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,8 +1488,8 @@ MonoBehaviour:
   - {fileID: 1594334068}
   - {fileID: 358547174}
   - {fileID: 151877014}
-  smallWaveMaxZombies: 10
-  bigWaveMaxZombies: 20
+  smallWaveMaxZombies: 1
+  bigWaveMaxZombies: 0
   smallWaveSpawnInterval: 8
   bigWaveSpawnInterval: 5
 --- !u!1 &619394800
@@ -2028,6 +2028,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombiePrefabs:
   - {fileID: 4781049090362272728, guid: 1f15f428c9e8d3e4392e318d3a73d8b2, type: 3}
+  - {fileID: 4924822442991245466, guid: 4edea19697ab3f044bdab6d1bbfaa02e, type: 3}
   poolSize: 20
 --- !u!1 &746031129
 GameObject:
@@ -4688,6 +4689,10 @@ PrefabInstance:
     - target: {fileID: 4924822442991245466, guid: 4edea19697ab3f044bdab6d1bbfaa02e, type: 3}
       propertyPath: m_Name
       value: ConeHeadZombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924822442991245466, guid: 4edea19697ab3f044bdab6d1bbfaa02e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

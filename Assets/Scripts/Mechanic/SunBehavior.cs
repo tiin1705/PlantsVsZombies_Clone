@@ -53,6 +53,8 @@ public class SunBehavior : MonoBehaviour
         if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
         {
             transform.position = targetPosition;
+            StartCoroutine(WaitForDestroy());
+            
         }
     }
 
@@ -65,5 +67,10 @@ public class SunBehavior : MonoBehaviour
             SunManager.Instance.AddSun(sunValue);
             Destroy(gameObject) ;
         }
+    }
+    private IEnumerator WaitForDestroy()
+    {
+        yield return new WaitForSeconds(10f);
+        Destroy(gameObject);
     }
 }

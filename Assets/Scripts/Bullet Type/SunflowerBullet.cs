@@ -94,8 +94,12 @@ public class SunflowerBullet : Bullet
             transform.position = Vector3.Lerp(endPosition, startPosition, (elapsedTime / fallDuration));
             elapsedTime += Time.deltaTime;
             yield return null;
+            
         }
+        yield return new WaitForSeconds(10f);
+        BulletPool.Instance.ReturnBullet(this);
     }
+  
     private void OnMouseDown()
     {
 

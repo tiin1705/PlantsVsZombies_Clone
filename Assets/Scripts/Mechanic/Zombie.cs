@@ -10,6 +10,8 @@ public abstract class Zombie : MonoBehaviour
     [SerializeField] protected int damage;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected int attackRate;
+    [SerializeField] private GameObject headPrefab;
+    private bool hasSpawnedHead = false;
     protected float lastAttackTime;
     public bool hasEnteredIdleState = false; //trạng thái idle khi bắt đầu ván đấu
     [SerializeField] protected float waitTime = 2f;
@@ -69,6 +71,7 @@ public abstract class Zombie : MonoBehaviour
     {
         //  Debug.Log("Zombie ís returned to pool");
         StartCoroutine(WaitForDestroy());
+        ResetState();
         ZombiePool.instance.ReturnZombie(this);
        
     }
@@ -131,6 +134,27 @@ public abstract class Zombie : MonoBehaviour
         }
     }
 
+    public IEnumerator SpawnZombieHead()
+    {
+       
+        if (!hasSpawnedHead) {
+            hasSpawnedHead = true;
+            Vector3 spawnPosition = transform.position + new Vector3(0, 0.5f , 0);  
+            if(headPrefab != null)
+            {
+                GameObject zombieHead = Instantiate(headPrefab, spawnPosition, Quaternion.identity);
+                Rigidbody2D rb = zombieHead.GetComponent<Rigidbody2D>();
+                if(rb != null)
+                {
+                    rb.AddForce(new Vector2(Random.Range(-2f, 2f), 4f), ForceMode2D.Impulse); //Tạo lực bay ngẫu nhiên
+                    rb.AddTorque(Random.Range(-200f, 200f)); //Tạo hiệu ứng xoay của đầu
+                }
+                Destroy(zombieHead, 3f);
+            }
+            yield return null;
+        }
+    }
+
   
 
     public float GetMoveSpeed()
@@ -158,6 +182,12 @@ public abstract class Zombie : MonoBehaviour
     public float GetHealth()
     {
         return health;
+    }
+
+    public void ResetState()
+    {
+        hasSpawnedHead = false;
+        health = 100;
     }
 
     public Transform GetClosestPlant()

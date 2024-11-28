@@ -196,7 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 60
   cost: 50
-  fireRate: 10
+  fireRate: 11.5
   cooldown: 7.5
   bulletSpeed: 4
   bulletDamage: 0

@@ -1173,7 +1173,7 @@ TextureImporter:
         width: 28
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1194,7 +1194,7 @@ TextureImporter:
         width: 24
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1215,7 +1215,7 @@ TextureImporter:
         width: 23
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1236,7 +1236,7 @@ TextureImporter:
         width: 25
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1257,7 +1257,7 @@ TextureImporter:
         width: 23
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1265,6 +1265,27 @@ TextureImporter:
       bones: []
       spriteID: a0b27ec9b16aea64abd706f6dd998045
       internalID: 1730910894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS_DSi_-_Plants_vs_Zombies_-_Zombie-removebg-preview_54
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 296
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 110c7767c81336b41bfdee9ff1fd804b
+      internalID: -277980765
       vertices: []
       indices: 
       edges: []
@@ -1330,6 +1351,7 @@ TextureImporter:
       DS_DSi_-_Plants_vs_Zombies_-_Zombie-removebg-preview_51: -1896915809
       DS_DSi_-_Plants_vs_Zombies_-_Zombie-removebg-preview_52: 1813491802
       DS_DSi_-_Plants_vs_Zombies_-_Zombie-removebg-preview_53: 1730910894
+      DS_DSi_-_Plants_vs_Zombies_-_Zombie-removebg-preview_54: -277980765
       DS_DSi_-_Plants_vs_Zombies_-_Zombie-removebg-preview_6: -1565897348
       DS_DSi_-_Plants_vs_Zombies_-_Zombie-removebg-preview_7: 1932637915
       DS_DSi_-_Plants_vs_Zombies_-_Zombie-removebg-preview_8: -594949537

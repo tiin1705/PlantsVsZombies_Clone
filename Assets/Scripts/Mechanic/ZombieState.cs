@@ -137,9 +137,9 @@ public class DeathWalkingState: ZombieState
     {
         if(context.GetHealth() <= 20)
         {
-            
+            context.StartCoroutine(context.SpawnZombieHead());
             context.GetComponent<Animator>().SetFloat("health", context.GetHealth());
-           
+            
         }
     }
 }
@@ -177,6 +177,7 @@ public class DeathAttackingState: ZombieState
     {
         if(context.GetHealth() <= 20)
         {
+            context.StartCoroutine(context.SpawnZombieHead());
             context.GetComponent<Animator>().SetFloat("health",context.GetHealth());
             context.GetComponent<Animator>().SetBool("isWaiting", false);
             context.GetComponent<Animator>().SetBool("isWalking", false);

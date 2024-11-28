@@ -8,7 +8,8 @@ public abstract class Bullet : MonoBehaviour
     [SerializeField] protected int damage;
     private Vector3 initialPosition;
     private Quaternion initialRotation;
-
+   
+    
     private void Awake()
     {
         initialPosition = transform.position;
@@ -19,6 +20,7 @@ public abstract class Bullet : MonoBehaviour
     {
         transform.position = initialPosition;
         transform.rotation = initialRotation;
+      
 
     }
 

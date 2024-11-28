@@ -26,7 +26,7 @@ public class ZombieSpawner : MonoBehaviour
             int zombiesSpawned = 0;
             while(zombiesSpawned < maxZombies)
             {
-                int zombiesToSpawn = isBigWave ? Random.Range(2, 4) : Random.Range(1, 2);
+                int zombiesToSpawn = isBigWave ? Random.Range(4, 5) : Random.Range(2, 3);
                 for(int i = 0; i < zombiesToSpawn; i++)
                 {
                     if (zombiesSpawned >= maxZombies) break;
@@ -34,7 +34,7 @@ public class ZombieSpawner : MonoBehaviour
                     Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
                     SpawnZombie(spawnPoint);
                     zombiesSpawned++;
-                    yield return new WaitForSeconds(1.5f);
+                    yield return new WaitForSeconds(2f);
                 }
                 yield return new WaitForSeconds(spawnInterval);
             }

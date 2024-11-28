@@ -30,15 +30,16 @@ public class PeaBullet : Bullet
             animator.SetTrigger("Explode");
             StopCoroutine(MoveBullet(direction));
             StartCoroutine(HandleExplosion());
+            
         }
     }
 
     private IEnumerator HandleExplosion()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
         //  Debug.Log("Returning bullet to pool: " + gameObject.name);
-       // Debug.Log("Returning bullet: " + this.GetType().Name); // Thêm dòng debug
-
+        // Debug.Log("Returning bullet: " + this.GetType().Name); // Thêm dòng debug
+        
         BulletPool.Instance.ReturnBullet(this); //trả đạn về pool
       //  Debug.Log("Peabullet returned to pool");
 

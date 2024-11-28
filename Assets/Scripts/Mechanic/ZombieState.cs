@@ -117,8 +117,12 @@ public class DeathWalkingState: ZombieState
     {
         
         PerformDeathWalkingAnimation(context);
-        MoveSlower(context);
-        if(context.GetHealth() <= 0)
+        //MoveSlower(context);
+        context.transform.position += Vector3.left * (context.GetMoveSpeed()) * Time.deltaTime;
+
+        context.GetComponent<Animator>().SetBool("isWaiting", false);
+        context.GetComponent<Animator>().SetBool("isWalking", true);
+        if (context.GetHealth() <= 0)
         {
             context.ChangeState(new DeadState());
         }else if (context.HasPlantsInRange())
@@ -184,5 +188,7 @@ public class DeathAttackingState: ZombieState
 
         }
     }
+
+  
 
 }

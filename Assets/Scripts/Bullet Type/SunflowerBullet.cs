@@ -96,7 +96,7 @@ public class SunflowerBullet : Bullet
             yield return null;
             
         }
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(12f);
         BulletPool.Instance.ReturnBullet(this);
     }
   

@@ -2,28 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalZombie : Zombie
+public class ConeHeadZombie : Zombie
 {
-   
     private Animator animator;
 
-    protected override void Start()
+    private void Start()
     {
         base.Start();
         animator = GetComponentInParent<Animator>();
-       
-        if(animator == null)
+
+        if (animator == null)
         {
-            Debug.Log("Animator not found in NormalZombie"); 
+            Debug.Log("Animator not found in NormalZombie");
         }
     }
     public override void Attack()
     {
         Transform targetPlant = GetClosestPlant();
-        if(targetPlant != null)
+        if (targetPlant != null)
         {
             Plant plant = targetPlant.GetComponent<Plant>();
-            if(plant != null)
+            if (plant != null)
             {
                 plant.TakeDamage(GetDamage());
             }
@@ -43,6 +42,5 @@ public class NormalZombie : Zombie
             }
         }
     }
-
 
 }

@@ -6,25 +6,30 @@ public abstract class Zombie : MonoBehaviour
 {
     private Transform target;
     public ZombieState currentState;
+    [SerializeField] protected float maxhealth;
     [SerializeField] protected float health;
     [SerializeField] protected int damage;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected int attackRate;
     [SerializeField] private GameObject headPrefab;
+    [SerializeField] protected float waitTime = 2f;
     private bool hasSpawnedHead = false;
     protected float lastAttackTime;
     public bool hasEnteredIdleState = false; //trạng thái idle khi bắt đầu ván đấu
-    [SerializeField] protected float waitTime = 2f;
+    private Animator animator;
     public abstract void Attack();
 
     public abstract void AttackWithNoDamage();
 
-
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
     public DetectionArea detectionArea;
-    public void Start()
+    protected virtual void Start()
     {
         currentState = new IdleState();
-        health = 100;
+     
         detectionArea = GetComponentInChildren<DetectionArea>();
         if (detectionArea == null)
         {
@@ -186,8 +191,22 @@ public abstract class Zombie : MonoBehaviour
 
     public void ResetState()
     {
+        health = maxhealth;
+        ChangeState(new WalkingState());
+        animator.SetBool("isWaiting", false);
+        animator.SetBool("isDead", false);
+        animator.SetBool("isWalking", true);
+        animator.SetBool("canAttack", false);
+        animator.SetFloat("health", health);
         hasSpawnedHead = false;
-        health = 100;
+
+        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        if(collider != null)
+        {
+            collider.enabled = true;
+        }
+
+
     }
 
     public Transform GetClosestPlant()

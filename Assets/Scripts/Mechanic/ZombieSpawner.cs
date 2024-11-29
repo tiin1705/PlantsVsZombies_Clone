@@ -51,6 +51,15 @@ public class ZombieSpawner : MonoBehaviour
         {
             zombie.transform.position = spawnPoint.position;
             zombie.transform.rotation = spawnPoint.rotation;
+
+            if(GameController.instance.currentState == GameController.GameState.Preparing)
+            {
+                zombie.ChangeState(new IdleState());
+            }
+            else if(GameController.instance.currentState == GameController.GameState.Playing)
+            {
+                zombie.ChangeState(new WalkingState());
+            }
         }
     }
 

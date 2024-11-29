@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class Zombie : MonoBehaviour
 {
-    private Transform target;
-    public ZombieState currentState;
+    public ZombieStateMachine stateMachine { get; private set; }
+    public ZombieState_ currentState;
     [SerializeField] protected float maxhealth;
     [SerializeField] protected float health;
     [SerializeField] protected int damage;
@@ -15,64 +15,62 @@ public abstract class Zombie : MonoBehaviour
     [SerializeField] protected float waitTime = 2f;
     private bool hasSpawnedHead = false;
     protected float lastAttackTime;
-    public bool hasEnteredIdleState = false; //trạng thái idle khi bắt đầu ván đấu
-    private Animator animator;
-    public abstract void Attack();
-
-    public abstract void AttackWithNoDamage();
+    public bool idleMode = false;
+    private Transform closetPlant;
+    public float distanceToTarget;
+    public Animator animator;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        stateMachine = new ZombieStateMachine(this);
     }
-    public DetectionArea detectionArea;
     protected virtual void Start()
     {
-        currentState = new IdleState();
-     
+        stateMachine.ChangeState(new IdleState());
         detectionArea = GetComponentInChildren<DetectionArea>();
-        if (detectionArea == null)
-        {
-           // Debug.LogError("DetectionArea not found on Zombie's parent.");
-        }
-        else
-        {
-          //  Debug.Log("DetectionArea found successfully: " + detectionArea.gameObject.name);
-        }
+        
+    }
+    public void ChangeState(ZombieState_ newState)
+    {
+        stateMachine.ChangeState(newState); // sử dụng state machine để thay đổi trạng thái
     }
 
-    // Update is called once per frame
     public void Update()
     {
-       // Debug.Log("Current State: " + currentState.GetType().Name);
-       // Debug.Log("Is Dead: " + IsDead());
-       // Debug.Log("Health: " + GetHealth());
-        //Debug.Log("Is Walking: " + GetComponent<Animator>().GetBool("isWalking"));
-        if (currentState != null)
+        float health = GetHealth();
+        if(currentState != null)
         {
-            currentState.Handle(this,health);
+            currentState.Handle(this, health);
         }
-       
-        UpdateDistanceToTargetInAnimator();
-        if (Input.GetKeyDown(KeyCode.Space)) // Nhấn phím Space để thử nghiệm
-        {
-            TakeDamage(10);
-        }
+        stateMachine.UpdateState();
     }
+
+   public void TakeDamage(int damageAmount)
+    {
+        health -= damageAmount;
+    }
+
+    public abstract void Attack();
+
+    public abstract void AttackWithNoDamage();
+
+ 
+    public DetectionArea detectionArea;
+  
+
+    // Update is called once per frame
+    
 
    
 
-    public void ChangeState(ZombieState newState)
-    {
-        currentState = newState;
-    }
 
     public bool IsDead()
     {
         return health <= 0;
     }
 
-    public void Die()
+    public void Died()
     {
         //  Debug.Log("Zombie ís returned to pool");
         StartCoroutine(WaitForDestroy());
@@ -83,60 +81,6 @@ public abstract class Zombie : MonoBehaviour
     private IEnumerator WaitForDestroy()
     {
         yield return new WaitForSeconds(10f);
-    }
-
-    public void WaitForWaveBegin()
-    {
-      //  Debug.Log("Zombie is waiting....");
-        StartCoroutine(Wait(waitTime));
-    }
-    private IEnumerator Wait(float waitTime)
-    {
-        float remainingTime = waitTime;
-        while(remainingTime > 0)
-        {
-            //Debug.Log("Time remaining: " + remainingTime.ToString("F2") + " seconds"); //hiển thị thời gian còn lại với 2 chữ số thập phân
-            yield return new WaitForSeconds(1f); // cập nhật sau mỗi 1 giây
-            remainingTime -= 1f;
-            ChangeState(new IdleState());
-        }
-       // Debug.Log("Zombie is now active");
-        ChangeState(new WalkingState());
-    }
-
-    public void TakeDamage(int damageAmount)
-    {
-        health -= damageAmount;
-     //   Debug.Log("Current health: " + health);
-        if (IsDead())
-        {
-            ChangeState(new DeadState());
-        }
-        else if(health <= 20)
-        {
-            if(currentState is WalkingState)
-            {
-                ChangeState(new DeathWalkingState());
-            }else if(currentState is AttackState)
-            {
-                ChangeState(new DeathAttackingState());
-            }
-        }
-    }
-
-    private void UpdateDistanceToTargetInAnimator()
-    {
-        Transform closestPlant = GetClosestPlant();
-
-        if(closestPlant != null)
-        {
-            float distanceToPlant = Vector3.Distance(transform.position, closestPlant.position);
-            GetComponent<Animator>().SetFloat("distanceToTarget", distanceToPlant);
-        }
-        else
-        {
-            GetComponent<Animator>().SetFloat("distanceToTarget", Mathf.Infinity);
-        }
     }
 
     public IEnumerator SpawnZombieHead()
@@ -160,7 +104,17 @@ public abstract class Zombie : MonoBehaviour
         }
     }
 
-  
+    public void UpdateDistanceToTarget()
+    {
+        if(closetPlant != null)
+        {
+            distanceToTarget = Vector3.Distance(transform.position, closetPlant.position);
+        }
+        else
+        {
+            distanceToTarget = Mathf.Infinity;
+        }
+    }
 
     public float GetMoveSpeed()
     {
@@ -190,9 +144,8 @@ public abstract class Zombie : MonoBehaviour
     }
 
     public void ResetState()
-    {
+    { 
         health = maxhealth;
-        ChangeState(new WalkingState());
         animator.SetBool("isWaiting", false);
         animator.SetBool("isDead", false);
         animator.SetBool("isWalking", true);

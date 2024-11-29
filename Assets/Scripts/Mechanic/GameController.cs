@@ -49,19 +49,24 @@ public class GameController : MonoBehaviour
 
     private IEnumerator HandlePreparationPhase()
     {
-        yield return new WaitForSeconds(preparationTime);
-        ChangeState(GameState.Playing);
-    }
-
-    private void StarPlaying()
-    {
-        if(zombieSpawner != null)
+        if (zombieSpawner != null)
         {
             zombieSpawner.StartSpawning();
         }
         else
         {
             Debug.LogWarning("ZombieSpawner chưa được gán");
+        }
+        yield return new WaitForSeconds(preparationTime);
+        ChangeState(GameState.Playing);
+    }
+
+    private void StarPlaying()
+    {
+        Zombie[] allZombies = FindObjectsOfType<Zombie>();
+        foreach(Zombie zombie in allZombies)
+        {
+            zombie.ChangeState(new WalkingState());
         }
     }
 

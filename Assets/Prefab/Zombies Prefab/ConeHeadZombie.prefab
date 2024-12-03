@@ -125,7 +125,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.2272727, y: 2.4545455}
+    oldSize: {x: 0.9310345, y: 1.862069}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -200,8 +200,10 @@ MonoBehaviour:
   moveSpeed: 0.5
   attackRate: 1
   headPrefab: {fileID: 1984935633998044921, guid: 4efa1ac1dda7eda4b9762804018534be, type: 3}
+  hatPrefab: {fileID: 1984935633998044921, guid: 7faffbead4bea524da67ba3eb5b5aa6d, type: 3}
   waitTime: 0
-  hasEnteredIdleState: 0
+  idleMode: 0
+  distanceToTarget: 0
   detectionArea: {fileID: 8725674587599057620}
 --- !u!1 &6521579534871727772
 GameObject:

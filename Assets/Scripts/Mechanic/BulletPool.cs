@@ -42,11 +42,11 @@ public class BulletPool : MonoBehaviour
     {
         if (bulletPools.ContainsKey(bulletType) && bulletPools[bulletType].Count > 0)
         {
-            Debug.Log("Pool Count for " + bulletType + ": " + bulletPools[bulletType].Count);
+           // Debug.Log("Pool Count for " + bulletType + ": " + bulletPools[bulletType].Count);
 
             Bullet bullet = bulletPools[bulletType].Dequeue();
             bullet.gameObject.SetActive(true);
-            Debug.Log("Bullet retrieved: " + bullet.gameObject.name);
+            //Debug.Log("Bullet retrieved: " + bullet.gameObject.name);
 
             return bullet;
         }
@@ -67,7 +67,7 @@ public class BulletPool : MonoBehaviour
         if (bulletPools.ContainsKey(bulletType))
         {
             bulletPools[bulletType].Enqueue(bullet); // Trả lại viên đạn vào pool tương ứng
-            Debug.Log("Bullet returned to pool: " + bulletType);
+            //Debug.Log("Bullet returned to pool: " + bulletType);
             return;
         }
 

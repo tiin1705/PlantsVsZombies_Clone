@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class ZombieState_ 
@@ -16,6 +17,7 @@ public abstract class ZombieState_
 
     public virtual void Handle(Zombie zombie, float health)
     {
+        zombie.UpdateDistanceToTarget();
         if(zombie.IsDead())
         {
             zombie.ChangeState(new DeadState());
@@ -25,17 +27,25 @@ public abstract class ZombieState_
 
 public class WalkingState : ZombieState_
 {
+    
     public override void EnterState(Zombie zombie)
     {
-        zombie.GetComponent<Animator>().SetBool("isWalking", true);
-        zombie.GetComponent<Animator>().SetBool("isWaiting", false);
-        zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
+        base.EnterState(zombie);
+        Animator animator = zombie.GetComponent<Animator>();
+        // zombie.GetComponent<Animator>().SetTrigger("ChangeToNormal");
+        animator.SetBool("NormalZombie", true);
+        animator.SetBool("isWalking", true);
+        animator.SetBool("isWaiting", false);
+        animator.SetFloat("health", zombie.GetHealth());
 
     }
 
     public override void ExitState(Zombie zombie)
     {
-        zombie.GetComponent<Animator>().SetBool("isWalking", false);
+        base.ExitState(zombie);
+        Animator animator = zombie.GetComponent<Animator>();
+        animator.SetBool("isWalking", false);
+        animator.SetFloat("health", zombie.GetHealth());
 
     }
 
@@ -43,30 +53,37 @@ public class WalkingState : ZombieState_
     {
         base.Handle(zombie, health);
         zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
-
-        if (zombie.HasPlantsInRange())
+        if(zombie.GetHealth() <= 100)
         {
-            Transform closetPlant = zombie.GetClosestPlant();
-            if(closetPlant != null)
+            if (zombie.HasPlantsInRange())
             {
-                Vector3 targetPosition = new Vector3(closetPlant.position.x, zombie.transform.position.y, zombie.transform.position.z);
-                zombie.transform.position = Vector3.MoveTowards(zombie.transform.position, targetPosition, zombie.GetMoveSpeed() * Time.deltaTime);
-
-                if (Vector3.Distance(zombie.transform.position, zombie.GetClosestPlant().position) <= 1f)
+                Transform closestPlant = zombie.GetClosestPlant();
+                if (closestPlant != null)
                 {
-                    zombie.ChangeState(new AttackState());
+                    Vector3 targetPosition = new Vector3(closestPlant.position.x, zombie.transform.position.y, zombie.transform.position.z);
+                    zombie.transform.position = Vector3.MoveTowards(zombie.transform.position, targetPosition, zombie.GetMoveSpeed() * Time.deltaTime);
+
+                    if (Vector3.Distance(zombie.transform.position, zombie.GetClosestPlant().position) <= 1f)
+                    {
+                        zombie.ChangeState(new AttackState());
+                    }
                 }
+            }
+            else
+            {
+                zombie.transform.position += Vector3.left * zombie.GetMoveSpeed() * Time.deltaTime;
+            }
+
+            if (health <= 20)
+            {
+                zombie.ChangeState(new DeathWalkingState());
             }
         }
         else
         {
-            zombie.transform.position += Vector3.left * zombie.GetMoveSpeed() * Time.deltaTime;
+            zombie.ChangeState(new HatZWalkingState());
         }
-
-        if (health <= 20)
-        {
-            zombie.ChangeState(new DeathWalkingState());
-        }
+      
        
     }
 }
@@ -75,6 +92,8 @@ public class DeathWalkingState : ZombieState_
 {
     public override void EnterState(Zombie zombie)
     {
+        base.EnterState(zombie);
+        zombie.GetComponent<Animator>().SetBool("NormalZombie", true);
         zombie.GetComponent<Animator>().SetBool("isWalking", true);
         zombie.GetComponent<Animator>().SetBool("canAttack", false);
         zombie.GetComponent<Animator>().SetBool("isWaiting", false);
@@ -84,6 +103,7 @@ public class DeathWalkingState : ZombieState_
 
     public override void ExitState(Zombie zombie)
     {
+        base.ExitState(zombie);
         zombie.GetComponent<Animator>().SetBool("isWalking", false);
 
     }
@@ -117,17 +137,23 @@ public class AttackState : ZombieState_
 {
     public override void EnterState(Zombie zombie)
     {
+        base.EnterState(zombie);
+        zombie.GetComponent<Animator>().SetBool("NormalZombie", true);
         zombie.GetComponent<Animator>().SetBool("canAttack", true);
         zombie.GetComponent<Animator>().SetBool("isWalking", false);
         zombie.GetComponent<Animator>().SetBool("isWaiting", false);
         zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
+
         // zombie.GetComponent<Animator>().GetFloat("distanceToTarget");
     }
 
     public override void ExitState(Zombie zombie)
     {
+        base.ExitState(zombie);
         zombie.GetComponent<Animator>().SetBool("canAttack", false);
         zombie.GetComponent<Animator>().SetBool("isWalking", true);
+        zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
+
     }
 
     public override void Handle(Zombie zombie, float health)
@@ -136,7 +162,8 @@ public class AttackState : ZombieState_
         zombie.UpdateDistanceToTarget();
         zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
 
-        if(health <= 20)
+
+        if (zombie.GetHealth() <= 20)
         {
             zombie.ChangeState(new DeathAttackingState());
         }
@@ -149,12 +176,15 @@ public class AttackState : ZombieState_
                 zombie.SetLastAttackTime(Time.time);
             }
         }
-        else
+        else 
         {
-            Transform closestPlant = zombie.GetClosestPlant();
-            if (closestPlant == null || (closestPlant.GetComponent<Plant>().GetHealth() <= 0 && health > 20))
+            if(zombie.GetHealth() > 20)
             {
                 zombie.ChangeState(new WalkingState());
+            }
+            else
+            {
+                zombie.ChangeState(new DeathWalkingState());
             }
         }
     }
@@ -164,36 +194,43 @@ public class DeathAttackingState : ZombieState_
 {
     public override void EnterState(Zombie zombie)
     {
+        base.EnterState(zombie);
+        zombie.GetComponent<Animator>().SetBool("NormalZombie", true);
         zombie.GetComponent<Animator>().SetBool("canAttack", true);
         zombie.GetComponent<Animator>().SetBool("isWalking", false);
         zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
+
+
     }
 
     public override void ExitState(Zombie zombie)
     {
+        base.ExitState(zombie);
         zombie.GetComponent<Animator>().SetBool("canAttack", false);
         zombie.GetComponent<Animator>().SetBool("isWalking", true);
+        zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
+
     }
 
     public override void Handle(Zombie zombie, float health)
     {
         base.Handle(zombie, health);
-        zombie.UpdateDistanceToTarget();
         zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
+
         zombie.StartCoroutine(zombie.SpawnZombieHead());
 
         if (zombie.distanceToTarget <= 1)
         {
-            zombie.AttackWithNoDamage();
-            zombie.SetLastAttackTime(Time.time);
+            if (Time.time > zombie.GetLastAttackTime() + zombie.GetAttackRate())
+            {
+              //  Debug.Log("Zombie Attacking");
+                zombie.AttackWithNoDamage();
+                zombie.SetLastAttackTime(Time.time);
+            }
         }
         else
         {
-            Transform closestPlant = zombie.GetClosestPlant();
-            if (closestPlant == null || (closestPlant.GetComponent<Plant>().GetHealth() <= 0 && health > 20))
-            {
-                zombie.ChangeState(new DeathWalkingState());
-            }
+           zombie.ChangeState(new DeathWalkingState());
         }
     }
 }
@@ -225,11 +262,13 @@ public class IdleState : ZombieState_
 {
     public override void EnterState(Zombie zombie)
     {
+        base.EnterState(zombie);
         zombie.GetComponent<Animator>().SetBool("isWaiting", true);
     }
 
     public override void ExitState(Zombie zombie)
     {
+        base.ExitState(zombie);
         zombie.GetComponent<Animator>().SetBool("isWaiting", false);
     }
 
@@ -241,6 +280,159 @@ public class IdleState : ZombieState_
             zombie.ChangeState(new WalkingState());
         }
 
+    }
+}
+
+public class HatZIdleState : ZombieState_
+{
+    public override void EnterState(Zombie zombie)
+    {
+        base.EnterState(zombie);
+        zombie.GetComponent<Animator>().SetBool("NormalZombie", false);
+        zombie.GetComponent<Animator>().SetBool("isWaiting", true);
+        zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
+
+    }
+
+    public override void ExitState(Zombie zombie)
+    {
+        base.ExitState(zombie);
+        zombie.GetComponent<Animator>().SetBool("isWaiting", false);
+        zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
+
+    }
+
+    public override void Handle(Zombie zombie, float health)
+    {
+        base.Handle(zombie, health);
+        zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
+
+        if (zombie.GetHealth() > 100)
+        {
+            if (GameController.instance.currentState == GameController.GameState.Playing)
+            {
+                zombie.ChangeState(new HatZWalkingState());
+            }
+        }
+        else
+        {
+            zombie.ChangeState(new IdleState());
+        }
+    }
+}
+
+public class HatZWalkingState : ZombieState_
+{
+    public override void EnterState(Zombie zombie)
+    {
+        base.EnterState(zombie);
+        zombie.GetComponent<Animator>().SetBool("NormalZombie", false);
+        zombie.GetComponent<Animator>().SetBool("isWaiting", false);
+        zombie.GetComponent<Animator>().SetBool("isWalking", true);
+        zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
+
+    }
+
+    public override void ExitState(Zombie zombie)
+    {
+        base.ExitState(zombie);
+        zombie.GetComponent<Animator>().SetBool("isWalking", false);
+        zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
+
+    }
+
+    public override void Handle(Zombie zombie, float health)
+    {
+        base.Handle(zombie, health);
+        zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
+
+        if (zombie.GetHealth() > 100)
+        {
+            if (zombie.HasPlantsInRange())
+            {
+                Transform closestPlant = zombie.GetClosestPlant();
+                if(closestPlant != null)
+                {
+                    Vector3 targetPosition = new Vector3(closestPlant.position.x, zombie.transform.position.y, zombie.transform.position.z);
+                    zombie.transform.position = Vector3.MoveTowards(zombie.transform.position, targetPosition, zombie.GetMoveSpeed() * Time.deltaTime);
+
+                    if (Vector3.Distance(zombie.transform.position, zombie.GetClosestPlant().position) <= 1f)
+                    {
+                        zombie.ChangeState(new HatZAttackState());
+                    }
+                }
+            }
+            else
+            {
+                zombie.transform.position += Vector3.left * zombie.GetMoveSpeed() * Time.deltaTime;
+            }
+        }
+        else 
+        {
+
+            zombie.ChangeState(new WalkingState());
+            zombie.StartCoroutine(zombie.SpawnZombieHat());
+        }
+    }
+}
+
+public class HatZAttackState : ZombieState_
+{
+    public override void EnterState(Zombie zombie)
+    {
+        base.EnterState(zombie);
+        zombie.GetComponent<Animator>().SetBool("NormalZombie", false);
+        zombie.GetComponent<Animator>().SetBool("canAttack", true);
+        zombie.GetComponent<Animator>().SetBool("isWaiting", false);
+        zombie.GetComponent<Animator>().SetBool("isWalking", false);
+        zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
+
+    }
+
+    public override void ExitState(Zombie zombie)
+    {
+        base.ExitState(zombie);
+        zombie.GetComponent<Animator>().SetBool("canAttack", false);
+        zombie.GetComponent<Animator>().SetBool("isWalking", true);
+        zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
+
+    }
+
+    public override void Handle(Zombie zombie, float health)
+    {
+        base.Handle(zombie, health);
+        zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
+
+        if (zombie.GetHealth() > 100)
+        {
+            if (zombie.distanceToTarget <= 1)
+            {
+                if (Time.time > zombie.GetLastAttackTime() + zombie.GetAttackRate())
+                {
+                    zombie.Attack();
+                    zombie.SetLastAttackTime(Time.time);
+                }
+            }
+            else
+            {
+                zombie.ChangeState(new HatZWalkingState());
+            }
+        }
+        else if(zombie.GetHealth() <= 100)
+        {
+            if(zombie.distanceToTarget <= 1)
+            {
+               // zombie.GetComponent<Animator>().SetTrigger("ChangeToNormal");
+                zombie.ChangeState(new AttackState());
+                zombie.StartCoroutine(zombie.SpawnZombieHat());
+            }
+            else
+            {
+                //zombie.GetComponent<Animator>().SetTrigger("ChangeToNormal");
+                zombie.ChangeState(new WalkingState());
+                zombie.StartCoroutine(zombie.SpawnZombieHat());
+            }
+        }
     }
 }
 

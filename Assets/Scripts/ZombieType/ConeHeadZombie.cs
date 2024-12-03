@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class ConeHeadZombie : Zombie
 {
-    private Animator animator;
 
-    private void Start()
+    protected override void Start()
     {
         base.Start();
         animator = GetComponentInParent<Animator>();
 
-        if (animator == null)
-        {
-            Debug.Log("Animator not found in NormalZombie");
-        }
+      
     }
     public override void Attack()
     {

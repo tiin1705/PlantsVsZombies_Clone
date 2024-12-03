@@ -4,7 +4,7 @@ using UnityEngine;
 public class SunManager : MonoBehaviour
 {
     public static SunManager Instance;
-    private int currentSun = 100;
+    [SerializeField] private int currentSun = 100;
 
     public List<PlantButtonData> plantButton;
     public PlantFactory plantFactory;

@@ -5,7 +5,6 @@ using UnityEngine;
 public class NormalZombie : Zombie
 {
    
-    private Animator animator;
 
     protected override void Start()
     {

@@ -12,12 +12,14 @@ public abstract class Zombie : MonoBehaviour
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected int attackRate;
     [SerializeField] private GameObject headPrefab;
+    [SerializeField] private GameObject hatPrefab;
     [SerializeField] protected float waitTime = 2f;
     private bool hasSpawnedHead = false;
+    private bool hasSpawnedHat = false;
     protected float lastAttackTime;
     public bool idleMode = false;
     public float distanceToTarget;
-    public Animator animator;
+    protected Animator animator;
 
     private void Awake()
     {
@@ -46,7 +48,8 @@ public abstract class Zombie : MonoBehaviour
             currentState.Handle(this, health);
         }
         stateMachine.UpdateState();
-       
+        UpdateDistanceToTarget();
+        UpdateHealthAndAnimator(health);
         
     }
 
@@ -109,6 +112,27 @@ public abstract class Zombie : MonoBehaviour
         }
     }
 
+    public IEnumerator SpawnZombieHat()
+    {
+        if (!hasSpawnedHat)
+        {
+            hasSpawnedHat = true;
+            Vector3 spawnPosition = transform.position + new Vector3(0, 1f, 0);
+            if(hatPrefab != null)
+            {
+                GameObject zombieHat = Instantiate(hatPrefab, spawnPosition, Quaternion.identity); 
+                Rigidbody2D rb = zombieHat.GetComponent<Rigidbody2D>();
+                if(rb != null)
+                {
+                    rb.AddForce(new Vector2(Random.Range(-2f, 2f), 4f), ForceMode2D.Impulse); //Tạo lực bay ngẫu nhiên
+                    rb.AddTorque(Random.Range(-200f, 200f)); //Tạo hiệu ứng xoay của nón
+                }
+                Destroy(zombieHat, 3f);
+            }
+            yield return null;
+        }
+    }
+
     public void UpdateDistanceToTarget()
     {
         Transform closestPlant = detectionArea.GetClosestPlant();
@@ -123,6 +147,14 @@ public abstract class Zombie : MonoBehaviour
         }
     }
 
+    public void UpdateHealthAndAnimator(float newHealth)
+    {
+        if(newHealth != health)
+        {
+            health = newHealth;
+            animator.SetFloat("health", health);
+        }
+    }
     public float GetMoveSpeed()
     {
         return moveSpeed;
@@ -153,11 +185,12 @@ public abstract class Zombie : MonoBehaviour
     public void ResetState()
     { 
         health = maxhealth;
-        animator.SetBool("isWaiting", false);
+        animator.SetBool("isWaiting", true);
         animator.SetBool("isDead", false);
-        animator.SetBool("isWalking", true);
+        animator.SetBool("isWalking", false);
         animator.SetBool("canAttack", false);
         animator.SetFloat("health", health);
+        animator.SetBool("NormalZombie", false);
         hasSpawnedHead = false;
 
         BoxCollider2D collider = GetComponent<BoxCollider2D>();

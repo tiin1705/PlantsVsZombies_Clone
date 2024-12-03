@@ -66,7 +66,14 @@ public class GameController : MonoBehaviour
         Zombie[] allZombies = FindObjectsOfType<Zombie>();
         foreach(Zombie zombie in allZombies)
         {
-            zombie.ChangeState(new WalkingState());
+            if(zombie.GetHealth() > 100)
+            {
+                zombie.ChangeState(new HatZWalkingState());
+            }
+            else
+            {
+                zombie.ChangeState(new WalkingState());
+            }
         }
     }
 

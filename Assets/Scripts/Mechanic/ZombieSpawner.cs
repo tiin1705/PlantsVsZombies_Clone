@@ -46,7 +46,7 @@ public class ZombieSpawner : MonoBehaviour
 
     private void SpawnZombie(Transform spawnPoint)
     {
-        Zombie zombie = ZombiePool.instance.GetZombie("NormalZombie");
+        Zombie zombie = ZombiePool.instance.GetZombie("ConeHeadZombie");
         if(zombie != null)
         {
             zombie.transform.position = spawnPoint.position;
@@ -54,11 +54,27 @@ public class ZombieSpawner : MonoBehaviour
 
             if(GameController.instance.currentState == GameController.GameState.Preparing)
             {
-                zombie.ChangeState(new IdleState());
+                if(zombie.GetHealth() > 100)
+                {
+                    zombie.ChangeState(new HatZIdleState());
+                }
+                else
+                {
+                    zombie.ChangeState(new IdleState());
+                }
+               
             }
-            else if(GameController.instance.currentState == GameController.GameState.Playing)
+            if(GameController.instance.currentState == GameController.GameState.Playing)
             {
-                zombie.ChangeState(new WalkingState());
+                if(zombie.GetHealth() > 100)
+                {
+                    zombie.ChangeState(new HatZWalkingState());
+                }
+                else
+                {
+                    zombie.ChangeState(new WalkingState());
+                }
+               
             }
         }
     }

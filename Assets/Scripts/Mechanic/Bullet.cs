@@ -61,7 +61,7 @@ public abstract class Bullet : MonoBehaviour
             if(zombie != null)
             {
                 zombie.TakeDamage(damage);
-                Debug.Log("Zombie took damage: " + damage);
+               // Debug.Log("Zombie took damage: " + damage);
 
             }
         }

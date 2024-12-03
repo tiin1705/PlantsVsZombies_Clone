@@ -16,7 +16,6 @@ public abstract class Zombie : MonoBehaviour
     private bool hasSpawnedHead = false;
     protected float lastAttackTime;
     public bool idleMode = false;
-    private Transform closetPlant;
     public float distanceToTarget;
     public Animator animator;
 
@@ -33,22 +32,28 @@ public abstract class Zombie : MonoBehaviour
     }
     public void ChangeState(ZombieState_ newState)
     {
+        Debug.Log($"Zombie changing state from {currentState?.GetType().Name} to {newState.GetType().Name}");
+
         stateMachine.ChangeState(newState); // sử dụng state machine để thay đổi trạng thái
     }
 
     public void Update()
     {
+        UpdateDistanceToTarget();
         float health = GetHealth();
         if(currentState != null)
         {
             currentState.Handle(this, health);
         }
         stateMachine.UpdateState();
+       
+        
     }
 
    public void TakeDamage(int damageAmount)
     {
         health -= damageAmount;
+        
     }
 
     public abstract void Attack();
@@ -106,9 +111,11 @@ public abstract class Zombie : MonoBehaviour
 
     public void UpdateDistanceToTarget()
     {
-        if(closetPlant != null)
+        Transform closestPlant = detectionArea.GetClosestPlant();
+
+        if (closestPlant != null)
         {
-            distanceToTarget = Vector3.Distance(transform.position, closetPlant.position);
+            distanceToTarget = Vector3.Distance(transform.position, closestPlant.position);
         }
         else
         {

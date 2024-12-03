@@ -25,7 +25,7 @@ public class DetectionArea : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Plant"))
+        if (collision.CompareTag("Plant"))
         {
             detectedPlants.Remove(collision.transform);
         }
@@ -54,16 +54,6 @@ public class DetectionArea : MonoBehaviour
                 }
             }
         }
-
-        if (closestPlant == null)
-        {
-           
-        }
-        else
-        {
-            // Debug.Log("Closest plant: " + closestPlant.name + " at distance: " + closestDistance);
-        }
-
         return closestPlant; ;
     }
     public bool HasPlantInRange()

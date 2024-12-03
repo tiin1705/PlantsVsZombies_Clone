@@ -21,7 +21,6 @@ public class ZombieStateMachine
 
     public void UpdateState()
     {
-        Debug.Log("Zombie current state: " + currentState);
         currentState?.Handle(zombie, zombie.GetHealth()); // Xử lí logic của trạng thái hiện tại
     }
 

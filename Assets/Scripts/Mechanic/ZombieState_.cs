@@ -49,12 +49,13 @@ public class WalkingState : ZombieState_
             Transform closetPlant = zombie.GetClosestPlant();
             if(closetPlant != null)
             {
-                zombie.transform.position += Vector3.left * zombie.GetMoveSpeed() * Time.deltaTime;
-            }
+                Vector3 targetPosition = new Vector3(closetPlant.position.x, zombie.transform.position.y, zombie.transform.position.z);
+                zombie.transform.position = Vector3.MoveTowards(zombie.transform.position, targetPosition, zombie.GetMoveSpeed() * Time.deltaTime);
 
-            if(Vector3.Distance(zombie.transform.position, zombie.GetClosestPlant().position) <= 1f)
-            {
-                zombie.ChangeState(new AttackState());
+                if (Vector3.Distance(zombie.transform.position, zombie.GetClosestPlant().position) <= 1f)
+                {
+                    zombie.ChangeState(new AttackState());
+                }
             }
         }
         else
@@ -142,8 +143,11 @@ public class AttackState : ZombieState_
 
         if (zombie.distanceToTarget <= 1)
         {
-            zombie.Attack();
-            zombie.SetLastAttackTime(Time.time);
+            if(Time.time > zombie.GetLastAttackTime() + zombie.GetAttackRate()) { 
+                Debug.Log("Zombie Attacking");
+                zombie.Attack();
+                zombie.SetLastAttackTime(Time.time);
+            }
         }
         else
         {
@@ -180,7 +184,7 @@ public class DeathAttackingState : ZombieState_
 
         if (zombie.distanceToTarget <= 1)
         {
-            zombie.Attack();
+            zombie.AttackWithNoDamage();
             zombie.SetLastAttackTime(Time.time);
         }
         else

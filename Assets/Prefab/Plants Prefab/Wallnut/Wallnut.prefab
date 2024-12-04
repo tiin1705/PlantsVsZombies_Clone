@@ -197,7 +197,7 @@ MonoBehaviour:
   health: 400
   cost: 50
   fireRate: 0
-  cooldown: 16
+  cooldown: 25
 --- !u!1 &8376090737107866488
 GameObject:
   m_ObjectHideFlags: 0

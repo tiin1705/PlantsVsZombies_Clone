@@ -197,7 +197,7 @@ MonoBehaviour:
   maxhealth: 200
   health: 200
   damage: 10
-  moveSpeed: 0.5
+  moveSpeed: 0.3
   attackRate: 1
   headPrefab: {fileID: 1984935633998044921, guid: 4efa1ac1dda7eda4b9762804018534be, type: 3}
   hatPrefab: {fileID: 1984935633998044921, guid: 7faffbead4bea524da67ba3eb5b5aa6d, type: 3}

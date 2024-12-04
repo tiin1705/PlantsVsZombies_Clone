@@ -93,7 +93,7 @@ public class ZombieSpawner : MonoBehaviour
     { 
         if (currentPhaseDuration == 60f) return false; //Early Game không spawn ConeHeadZombie
         if (currentPhaseDuration == 20f) return Random.value < 0.33f; //Early-Mid Game 1:3
-        if (currentPhaseDuration == 50f) return Random.value < 0.25f; // Mid Game 1:4
-        return Random.value < 0.4f; // Final 2:5
+        if (currentPhaseDuration == 50f) return Random.value < 0.5f; // Mid Game 1:4
+        return Random.value < 0.6f; // Final 2:5
     }
 }

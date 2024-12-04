@@ -4055,6 +4055,8 @@ MonoBehaviour:
   sunflowerPrefab: {fileID: 7878468569887672839, guid: e8b120dc8b71db14586e32d892c92243, type: 3}
   peashooterGhostPrefab: {fileID: 5748261580127547971, guid: b622eb3064e5fdf458bbe25aa142be03, type: 3}
   sunflowerGhostPrefab: {fileID: 7878468569887672839, guid: dfd99d84b57ca0442b7084e7cf3f9b5e, type: 3}
+  wallnutPrefab: {fileID: 7878468569887672839, guid: 28371e11dd5d1534d81cce5f95301a8b, type: 3}
+  wallnutGhostPrefab: {fileID: 7878468569887672839, guid: a2d9c4322eb65fc4894d2a35b1a916ed, type: 3}
 --- !u!1 &1741032627
 GameObject:
   m_ObjectHideFlags: 0
@@ -4200,6 +4202,13 @@ MonoBehaviour:
     button: {fileID: 124034423}
     plantType: Sunflower
     cooldownText: {fileID: 1540865589}
+    cooldownRemaining: 0
+  - plantImage: {fileID: 836299934}
+    enabledSprite: {fileID: 1414804623, guid: 5909c7131910a9b4b9185071f1acb07e, type: 3}
+    disabledSprite: {fileID: 895476394, guid: 5909c7131910a9b4b9185071f1acb07e, type: 3}
+    button: {fileID: 836299933}
+    plantType: Wallnut
+    cooldownText: {fileID: 259712926}
     cooldownRemaining: 0
   plantFactory: {fileID: 1705491153}
 --- !u!114 &1941145878

@@ -6,11 +6,11 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
-    public enum GameState { Preparing, Playing, GameOver}
+    public enum GameState { Preparing, EarlyGame, EarlyMidGame, MidGame, Final, GameOver}
     public GameState currentState;
 
     [SerializeField] private ZombieSpawner zombieSpawner;
-    [SerializeField] private float preparationTime = 10f;
+    [SerializeField] private float preparationTime = 20f;
 
     private void Awake()
     {
@@ -23,6 +23,11 @@ public class GameController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Update()
+    {
+        Debug.Log("Current State: " +  currentState);
     }
 
     private void Start()
@@ -38,8 +43,17 @@ public class GameController : MonoBehaviour
             case GameState.Preparing:
                 StartCoroutine(HandlePreparationPhase());
                 break;
-            case GameState.Playing:
-                StarPlaying();
+            case GameState.EarlyGame:
+                StartEarlyGame();
+                break;
+            case GameState.EarlyMidGame:
+                StartEarlyMidGame();
+                break;
+            case GameState.MidGame:
+                StartMidGame();
+                break;
+            case GameState.Final:
+                StartFinalGame();
                 break;
             case GameState.GameOver:
                 HandleGameOver();
@@ -49,19 +63,11 @@ public class GameController : MonoBehaviour
 
     private IEnumerator HandlePreparationPhase()
     {
-        if (zombieSpawner != null)
-        {
-            zombieSpawner.StartSpawning();
-        }
-        else
-        {
-            Debug.LogWarning("ZombieSpawner chưa được gán");
-        }
         yield return new WaitForSeconds(preparationTime);
-        ChangeState(GameState.Playing);
+        ChangeState(GameState.EarlyGame);
     }
 
-    private void StarPlaying()
+    private void StartPlaying()
     {
         Zombie[] allZombies = FindObjectsOfType<Zombie>();
         foreach(Zombie zombie in allZombies)
@@ -77,6 +83,54 @@ public class GameController : MonoBehaviour
         }
     }
 
+   
+
+    public void AdvanceToNextPhase()
+    {
+        if(currentState == GameState.Final)
+        {
+            ChangeState(GameState.GameOver);
+        }
+        else
+        {
+            ChangeState((GameState)((int)currentState + 1));
+        }
+    }
+
+    private IEnumerator TransitionAfterPhase( float phaseDuration, GameState nextState)
+    {
+        yield return new WaitForSeconds(phaseDuration);
+        ChangeState(nextState);
+    }
+    
+    private void StartEarlyGame()
+    {
+        zombieSpawner.StartSpawning();
+        StartPlaying();
+        StartCoroutine(TransitionAfterPhase(60f, GameState.EarlyMidGame));
+        
+    }
+    private void StartEarlyMidGame()
+    {
+        zombieSpawner.StartSpawning();
+        StartPlaying();
+        StartCoroutine(TransitionAfterPhase(20f, GameState.MidGame));
+       
+    }
+    private void StartMidGame()
+    {
+        zombieSpawner.StartSpawning();
+        StartPlaying();
+        StartCoroutine(TransitionAfterPhase(50f, GameState.Final));
+       
+    }
+    private void StartFinalGame()
+    {
+        zombieSpawner.StartSpawning();
+        StartPlaying();
+        StartCoroutine(TransitionAfterPhase(37.5f, GameState.GameOver));
+       
+    }
     private void HandleGameOver()
     {
         Debug.Log("Game Kết thúc");

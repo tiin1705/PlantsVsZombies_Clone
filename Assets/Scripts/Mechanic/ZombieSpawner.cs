@@ -5,65 +5,95 @@ using UnityEngine;
 public class ZombieSpawner : MonoBehaviour
 {
     public Transform[] spawnPoints;
-    public int smallWaveMaxZombies = 10;
-    public int bigWaveMaxZombies = 20;
-    public float smallWaveSpawnInterval = 5f;
-    public float bigWaveSpawnInterval = 3f;
 
-    [SerializeField] private bool isBigWave = false;
+    private float currentPhaseDuration;
+    private float spawnInterval;
+    private int minZombiesPerWave;
+    private int maxZombiesPerWave;
 
-    private const float SmallWaveNormalRatio = 0.8f; // 4/5
-    private const float BigWaveNormalRatio = 0.5f; // 3/4
+
+ 
 
     public void StartSpawning()
     {
-        StartCoroutine(SpawnWaves());
+        StartCoroutine(HandlePhases());
     }
 
-    private IEnumerator SpawnWaves()
+    private IEnumerator HandlePhases()
     {
-        while (true)
-        {
-            int maxZombies = isBigWave ? bigWaveMaxZombies : smallWaveMaxZombies;
-            float spawnInterval = isBigWave ? bigWaveSpawnInterval : smallWaveSpawnInterval;
-            int zombiesSpawned = 0;
-            while(zombiesSpawned < maxZombies)
-            {
-               Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-                bool isNormalZombie = ShouldSpawnNormalZombie(isBigWave);
+        //Phase 1: Early Game
+        SetPhaseParameters(60f, 8f, 1, 2);
+        yield return StartCoroutine(SpawnPhase());
 
-                SpawnZombie(spawnPoint, isNormalZombie);
-                zombiesSpawned++;
-                yield return new WaitForSeconds(spawnInterval);
+        //Phase 2: Early-Mid Game
+        SetPhaseParameters(20f, 8f, 2, 3);
+        yield return StartCoroutine(SpawnPhase());
+
+        //Phase 3: Mid Game
+        SetPhaseParameters(50f, 8f, 3, 4);
+        yield return StartCoroutine(SpawnPhase());
+
+        //Phase 4: Final
+        SetPhaseParameters(37.5f, 5f, 4, 5);
+        yield return StartCoroutine(SpawnPhase());
+    }
+
+    private void SetPhaseParameters(float phaseDuration, float interval, int minZombies, int maxZombies)
+    {
+        currentPhaseDuration = phaseDuration;
+        spawnInterval = interval;
+        minZombiesPerWave = minZombies;
+        maxZombiesPerWave = maxZombies;
+    }
+    
+    private IEnumerator SpawnPhase()
+    {
+        float elapsedTime = 0f;
+
+        while(elapsedTime < currentPhaseDuration)
+        {
+            int zombieToSpawn = Random.Range(minZombiesPerWave, maxZombiesPerWave);
+            for(int i = 0; i < zombieToSpawn; i++)
+            {
+                Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+                bool isConeheadZombie = ShouldSpawnConeHeadZombie();
+
+                SpawnZombie(spawnPoint, isConeheadZombie);
+                float randomWaitTime = Random.Range(2f, 3f);
+                yield return new WaitForSeconds(randomWaitTime);
             }
-            isBigWave = !isBigWave;
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(spawnInterval);
+            elapsedTime += spawnInterval;
         }
     }
 
-    private void SpawnZombie(Transform spawnPoint, bool isNormalZombie)
+    private void SpawnZombie(Transform spawnPoint, bool isConeHeadZombie)
     {
-        string zombieType = isNormalZombie ? "NormalZombie" : "ConeHeadZombie";
+        string zombieType = isConeHeadZombie ? "ConeHeadZombie" : "NormalZombie";
         Zombie zombie = ZombiePool.instance.GetZombie(zombieType);
         if(zombie != null)
         {
             zombie.transform.position = spawnPoint.position;
             zombie.transform.rotation = spawnPoint.rotation;
 
+            zombie.SetHealth(zombie.GetMaxHealth());
+
             if(GameController.instance.currentState == GameController.GameState.Preparing)
             {
                 zombie.ChangeState(zombie.GetHealth() > 100 ? new HatZIdleState() : new IdleState());
             }
-            if(GameController.instance.currentState == GameController.GameState.Playing)
+            else
             {
                 zombie.ChangeState(zombie.GetHealth() > 100 ? new HatZWalkingState() : new WalkingState());
             }
         }
     }
 
-    private bool ShouldSpawnNormalZombie(bool isBigWave)
-    {
-        float normalRatio = isBigWave ? BigWaveNormalRatio : SmallWaveNormalRatio;
-        return Random.value < normalRatio;
+    private bool ShouldSpawnConeHeadZombie()
+    { 
+        if (currentPhaseDuration == 60f) return false; //Early Game không spawn ConeHeadZombie
+        if (currentPhaseDuration == 20f) return Random.value < 0.33f; //Early-Mid Game 1:3
+        if (currentPhaseDuration == 50f) return Random.value < 0.25f; // Mid Game 1:4
+        return Random.value < 0.4f; // Final 2:5
     }
 }

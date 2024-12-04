@@ -82,13 +82,14 @@ public abstract class Zombie : MonoBehaviour
     {
         //  Debug.Log("Zombie ís returned to pool");
         StartCoroutine(WaitForDestroy());
-        ResetState();
         ZombiePool.instance.ReturnZombie(this);
        
     }
     private IEnumerator WaitForDestroy()
     {
-        yield return new WaitForSeconds(10f);
+        ResetState();
+        yield return new WaitForSeconds(5f);
+        
     }
 
     public IEnumerator SpawnZombieHead()
@@ -172,6 +173,16 @@ public abstract class Zombie : MonoBehaviour
     {
         return lastAttackTime;
     }
+
+    public float GetMaxHealth()
+    {
+        return maxhealth;
+    }
+
+    public void SetHealth(float newHealth)
+    {
+        health = Mathf.Clamp(newHealth, 0, maxhealth);
+    }
     public void SetLastAttackTime(float time)
     {
         lastAttackTime = time;
@@ -183,7 +194,7 @@ public abstract class Zombie : MonoBehaviour
     }
 
     public void ResetState()
-    { 
+    {
         health = maxhealth;
         animator.SetBool("isWaiting", true);
         animator.SetBool("isDead", false);
@@ -192,12 +203,13 @@ public abstract class Zombie : MonoBehaviour
         animator.SetFloat("health", health);
         animator.SetBool("NormalZombie", false);
         hasSpawnedHead = false;
-
+        hasSpawnedHat = false;
         BoxCollider2D collider = GetComponent<BoxCollider2D>();
         if(collider != null)
         {
             collider.enabled = true;
         }
+        ChangeState(health > 100 ? new HatZIdleState() : new IdleState());
 
 
     }

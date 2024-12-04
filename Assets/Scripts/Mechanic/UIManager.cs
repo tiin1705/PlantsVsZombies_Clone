@@ -33,6 +33,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void OnWallnutButtonClick()
+    {
+        if (!isPlacingPlant)
+        {
+            StartPlacingPlant("Wallnut");
+        }
+    }
+
     private void StartPlacingPlant(string plantType)
     {
         if (plantPlacer != null)

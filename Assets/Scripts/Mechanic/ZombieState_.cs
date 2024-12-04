@@ -277,7 +277,7 @@ public class IdleState : ZombieState_
     public override void Handle(Zombie zombie, float health)
     {
         base.Handle(zombie, health);
-        if(GameController.instance.currentState == GameController.GameState.Playing)
+        if(GameController.instance.currentState != GameController.GameState.Preparing)
         {
             zombie.ChangeState(new WalkingState());
         }
@@ -311,7 +311,7 @@ public class HatZIdleState : ZombieState_
 
         if (zombie.GetHealth() > 100)
         {
-            if (GameController.instance.currentState == GameController.GameState.Playing)
+            if (GameController.instance.currentState != GameController.GameState.Preparing)
             {
                 zombie.ChangeState(new HatZWalkingState());
             }

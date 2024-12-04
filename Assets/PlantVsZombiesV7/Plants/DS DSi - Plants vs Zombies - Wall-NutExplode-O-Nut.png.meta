@@ -1,0 +1,527 @@
+fileFormatVersion: 2
+guid: 5909c7131910a9b4b9185071f1acb07e
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_0
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 182
+        width: 26
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e0967ca8a5a8f64ba2f4bae98a79d1c
+      internalID: 516303790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_1
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 182
+        width: 26
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bea4df45517155f46982017405875002
+      internalID: 1704523780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_2
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 182
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fc2ae20eafc8d3448a83bacfd2bde7e
+      internalID: -444414511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_3
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 182
+        width: 26
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd93f73d5496aaa42a5f60b9b067411e
+      internalID: -1113080569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_4
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 182
+        width: 26
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e06cadfcba62b4c43a0e0bb7f4dddde4
+      internalID: -824153635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_5
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 137
+        width: 26
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4dd52627f7c55b4cad88278f8bfe2cd
+      internalID: -569070296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_6
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 137
+        width: 26
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f961762daec8b9644aeabd64c4bfa4d1
+      internalID: 6177217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_7
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 137
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11fe544d7110294499ff3552d478b9ff
+      internalID: -579691182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_8
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 137
+        width: 26
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6999c7c713128fb4c863888c9f98f99c
+      internalID: -1375051174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_9
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 137
+        width: 26
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56aebf50997ec704f89188a318e35467
+      internalID: 401874538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_10
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 95
+        width: 26
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 570c99775ccf81c448a1b98a92bc29f8
+      internalID: 1874484489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_11
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 95
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f66cb783e00b30846b9a42b382946e0d
+      internalID: 1872040923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_12
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 95
+        width: 26
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 359f282a0b6116947ae49efbfe6df538
+      internalID: -1173244509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_13
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 95
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31aec4313bcd83e4c9f7e249ad257313
+      internalID: -1852652398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_14
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 95
+        width: 26
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 998fd29ed16868a47a4a3ccbcbde9ea2
+      internalID: 1090192751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_15
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 151
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a050eb7b976a194ba0f2b6d0c157d70
+      internalID: 1414804623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_16
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 151
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 479f0ef796ecd114cafac094b6014906
+      internalID: 895476394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_0: 516303790
+      DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_1: 1704523780
+      DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_10: 1874484489
+      DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_11: 1872040923
+      DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_12: -1173244509
+      DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_13: -1852652398
+      DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_14: 1090192751
+      DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_15: 1414804623
+      DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_16: 895476394
+      DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_2: -444414511
+      DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_3: -1113080569
+      DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_4: -824153635
+      DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_5: -569070296
+      DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_6: 6177217
+      DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_7: -579691182
+      DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_8: -1375051174
+      DS DSi - Plants vs Zombies - Wall-NutExplode-O-Nut_9: 401874538
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -47,7 +47,7 @@ public class ZombiePool : MonoBehaviour
 
     public void ReturnZombie(Zombie zombie)
     {
-        zombie.ResetState();
+      
         zombie.gameObject.SetActive(false);
         string zombieType = zombie.GetType().Name; // Lấy tên lớp
 

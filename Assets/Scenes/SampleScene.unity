@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   zombieSpawner: {fileID: 594785267}
-  preparationTime: 2
+  preparationTime: 15
 --- !u!1 &94205382
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,8 +1488,8 @@ MonoBehaviour:
   - {fileID: 1594334068}
   - {fileID: 358547174}
   - {fileID: 151877014}
-  smallWaveMaxZombies: 1
-  bigWaveMaxZombies: 0
+  smallWaveMaxZombies: 10
+  bigWaveMaxZombies: 20
   smallWaveSpawnInterval: 8
   bigWaveSpawnInterval: 5
 --- !u!1 &619394800
@@ -4144,7 +4144,7 @@ MonoBehaviour:
   bulletPrefabs:
   - {fileID: 4195218511246693886, guid: 880fd1c9b3dcd194f952c9e8a9a9b697, type: 3}
   - {fileID: 1460417767971912145, guid: fb986240b0d2c2949bb987dbc95a49fd, type: 3}
-  poolSize: 10
+  poolSize: 30
 --- !u!1 &1705491151
 GameObject:
   m_ObjectHideFlags: 0
@@ -4457,7 +4457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9257fb4c44a68f040b66d031ed62f7c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSun: 1000
+  currentSun: 100
   plantButton:
   - plantImage: {fileID: 1217759388}
     enabledSprite: {fileID: 361129947, guid: 3983fd75ad075f041b1681dda34c91cc, type: 3}

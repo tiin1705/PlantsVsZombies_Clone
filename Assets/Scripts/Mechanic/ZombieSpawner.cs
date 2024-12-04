@@ -6,11 +6,14 @@ public class ZombieSpawner : MonoBehaviour
 {
     public Transform[] spawnPoints;
     public int smallWaveMaxZombies = 10;
-    public int bigWaveMaxZombies = 15;
+    public int bigWaveMaxZombies = 20;
     public float smallWaveSpawnInterval = 5f;
     public float bigWaveSpawnInterval = 3f;
 
-    private bool isBigWave = false;
+    [SerializeField] private bool isBigWave = false;
+
+    private const float SmallWaveNormalRatio = 0.8f; // 4/5
+    private const float BigWaveNormalRatio = 0.5f; // 3/4
 
     public void StartSpawning()
     {
@@ -26,27 +29,22 @@ public class ZombieSpawner : MonoBehaviour
             int zombiesSpawned = 0;
             while(zombiesSpawned < maxZombies)
             {
-                int zombiesToSpawn = isBigWave ? Random.Range(4, 5) : Random.Range(2, 3);
-                for(int i = 0; i < zombiesToSpawn; i++)
-                {
-                    if (zombiesSpawned >= maxZombies) break;
+               Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+                bool isNormalZombie = ShouldSpawnNormalZombie(isBigWave);
 
-                    Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-                    SpawnZombie(spawnPoint);
-                    zombiesSpawned++;
-                    yield return new WaitForSeconds(2f);
-                }
+                SpawnZombie(spawnPoint, isNormalZombie);
+                zombiesSpawned++;
                 yield return new WaitForSeconds(spawnInterval);
             }
             isBigWave = !isBigWave;
-
             yield return new WaitForSeconds(5f);
         }
     }
 
-    private void SpawnZombie(Transform spawnPoint)
+    private void SpawnZombie(Transform spawnPoint, bool isNormalZombie)
     {
-        Zombie zombie = ZombiePool.instance.GetZombie("ConeHeadZombie");
+        string zombieType = isNormalZombie ? "NormalZombie" : "ConeHeadZombie";
+        Zombie zombie = ZombiePool.instance.GetZombie(zombieType);
         if(zombie != null)
         {
             zombie.transform.position = spawnPoint.position;
@@ -54,30 +52,18 @@ public class ZombieSpawner : MonoBehaviour
 
             if(GameController.instance.currentState == GameController.GameState.Preparing)
             {
-                if(zombie.GetHealth() > 100)
-                {
-                    zombie.ChangeState(new HatZIdleState());
-                }
-                else
-                {
-                    zombie.ChangeState(new IdleState());
-                }
-               
+                zombie.ChangeState(zombie.GetHealth() > 100 ? new HatZIdleState() : new IdleState());
             }
             if(GameController.instance.currentState == GameController.GameState.Playing)
             {
-                if(zombie.GetHealth() > 100)
-                {
-                    zombie.ChangeState(new HatZWalkingState());
-                }
-                else
-                {
-                    zombie.ChangeState(new WalkingState());
-                }
-               
+                zombie.ChangeState(zombie.GetHealth() > 100 ? new HatZWalkingState() : new WalkingState());
             }
         }
     }
 
-
+    private bool ShouldSpawnNormalZombie(bool isBigWave)
+    {
+        float normalRatio = isBigWave ? BigWaveNormalRatio : SmallWaveNormalRatio;
+        return Random.value < normalRatio;
+    }
 }

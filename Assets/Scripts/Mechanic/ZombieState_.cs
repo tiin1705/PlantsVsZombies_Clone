@@ -31,21 +31,20 @@ public class WalkingState : ZombieState_
     public override void EnterState(Zombie zombie)
     {
         base.EnterState(zombie);
-        Animator animator = zombie.GetComponent<Animator>();
         // zombie.GetComponent<Animator>().SetTrigger("ChangeToNormal");
-        animator.SetBool("NormalZombie", true);
-        animator.SetBool("isWalking", true);
-        animator.SetBool("isWaiting", false);
-        animator.SetFloat("health", zombie.GetHealth());
+        zombie.GetComponent<Animator>().SetBool("NormalZombie", true);
+        zombie.GetComponent<Animator>().SetBool("isWalking", true);
+        zombie.GetComponent<Animator>().SetBool("isWaiting", false);
+        zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
 
     }
 
     public override void ExitState(Zombie zombie)
     {
         base.ExitState(zombie);
-        Animator animator = zombie.GetComponent<Animator>();
-        animator.SetBool("isWalking", false);
-        animator.SetFloat("health", zombie.GetHealth());
+
+        zombie.GetComponent<Animator>().SetBool("isWalking", false);
+        zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
 
     }
 
@@ -167,24 +166,27 @@ public class AttackState : ZombieState_
         {
             zombie.ChangeState(new DeathAttackingState());
         }
-
-        if (zombie.distanceToTarget <= 1)
+        if(zombie.GetHealth() <= 100)
         {
-            if(Time.time > zombie.GetLastAttackTime() + zombie.GetAttackRate()) { 
-                Debug.Log("Zombie Attacking");
-                zombie.Attack();
-                zombie.SetLastAttackTime(Time.time);
-            }
-        }
-        else 
-        {
-            if(zombie.GetHealth() > 20)
+            if (zombie.distanceToTarget <= 1)
             {
-                zombie.ChangeState(new WalkingState());
+                if (Time.time > zombie.GetLastAttackTime() + zombie.GetAttackRate())
+                {
+                    Debug.Log("Zombie Attacking");
+                    zombie.Attack();
+                    zombie.SetLastAttackTime(Time.time);
+                }
             }
             else
             {
-                zombie.ChangeState(new DeathWalkingState());
+                if (zombie.GetHealth() > 20)
+                {
+                    zombie.ChangeState(new WalkingState());
+                }
+                else
+                {
+                    zombie.ChangeState(new DeathWalkingState());
+                }
             }
         }
     }

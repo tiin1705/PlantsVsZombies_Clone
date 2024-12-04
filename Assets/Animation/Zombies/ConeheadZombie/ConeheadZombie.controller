@@ -275,12 +275,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: NormalZombie
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: isWalking
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: canAttack
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8013272359363916354}
   m_Solo: 0

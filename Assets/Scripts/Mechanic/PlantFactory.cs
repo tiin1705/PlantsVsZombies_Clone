@@ -11,6 +11,8 @@ public class PlantFactory: MonoBehaviour
     public GameObject sunflowerGhostPrefab;
     public GameObject wallnutPrefab;
     public GameObject wallnutGhostPrefab;
+    public GameObject cherrybombPrefab;
+    public GameObject cherrybombGhostPrefab;
   
     //Phương thức tạo ra cây dựa trên loại cây
     public Plant CreatePlant(string plantType)
@@ -28,6 +30,9 @@ public class PlantFactory: MonoBehaviour
             case "Wallnut":
                 var wallnut = Instantiate(wallnutPrefab).GetComponent<Plant>();
                 return wallnut;
+            case "Cherrybomb":
+                var cherrybomb = Instantiate(cherrybombPrefab).GetComponent<Plant>();
+                return cherrybomb;
             default:
               //  Debug.LogError("Unknown Plant:" + plantType);
                 return null;
@@ -43,6 +48,8 @@ public class PlantFactory: MonoBehaviour
                 return sunflowerGhostPrefab;
             case "Wallnut":
                 return wallnutGhostPrefab;
+            case "Cherrybomb":
+                return cherrybombGhostPrefab;
             default:
               //  Debug.Log("Unknown Plant Type for Ghost: " + plantType);
                 return null;
@@ -59,6 +66,8 @@ public class PlantFactory: MonoBehaviour
                 return sunflowerPrefab.GetComponent<Plant>().GetCost();
             case "Wallnut":
                 return wallnutPrefab.GetComponent<Plant>().GetCost();
+            case "Cherrybomb":
+                return cherrybombPrefab.GetComponent<Plant>().GetCost();
             default:
                 return 0;
         }
@@ -74,6 +83,8 @@ public class PlantFactory: MonoBehaviour
                 return sunflowerPrefab.GetComponent<Plant>().GetCoolDown();
             case "Wallnut":
                 return wallnutPrefab.GetComponent<Plant>().GetCoolDown();
+            case "Cherrybomb":
+                return cherrybombPrefab.GetComponent<Plant>().GetCoolDown();
             default:
                 return 0f;
             }

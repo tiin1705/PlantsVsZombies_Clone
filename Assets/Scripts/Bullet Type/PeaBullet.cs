@@ -19,7 +19,9 @@ public class PeaBullet : Bullet
         StartCoroutine(MoveBullet(direction));
     }
 
-   
+    public override void Explode(int explodeDamage)
+    {
+    }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {

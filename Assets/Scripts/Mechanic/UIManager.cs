@@ -41,6 +41,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void OnCherrybombButtonClick()
+    {
+        if (!isPlacingPlant)
+        {
+            StartPlacingPlant("Cherrybomb");
+        }
+    }
+
     private void StartPlacingPlant(string plantType)
     {
         if (plantPlacer != null)

@@ -7,6 +7,7 @@ public class PlantPlacer : MonoBehaviour
     public PlantFactory PlantFactory;
     private GameObject plantGhosts;
     private bool isPlacing = false;
+
     public LayerMask gridLayer;
     private string selectedPlantType;
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Bullet : MonoBehaviour
 {
     [SerializeField] protected float speed;
-    [SerializeField] protected int damage;
+    [SerializeField] public int damage;
     private Vector3 initialPosition;
     private Quaternion initialRotation;
    
@@ -26,6 +26,7 @@ public abstract class Bullet : MonoBehaviour
 
     public abstract void Initialize(float bulletSpeed, int bulletDamage);
     public abstract void Fire(Vector2 direction);
+    public abstract void Explode(int explodeDamage);
     protected virtual IEnumerator MoveBullet(Vector2 direction)
     {
         while (gameObject.activeSelf)

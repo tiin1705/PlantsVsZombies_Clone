@@ -11,7 +11,7 @@ public class Peashooter : Plant
     private void Start()
     {
        
-        Debug.Log("Peashooter initialized"); // Thêm dòng này
+        //Debug.Log("Peashooter initialized"); // Thêm dòng này
         animator = GetComponent<Animator>();
     }
 

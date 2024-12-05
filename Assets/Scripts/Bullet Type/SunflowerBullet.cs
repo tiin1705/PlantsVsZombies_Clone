@@ -29,6 +29,10 @@ public class SunflowerBullet : Bullet
 
     }
 
+    public override void Explode(int explodeDamage)
+    {
+    }
+
     public override void ResetState()
     {
         base.ResetState();

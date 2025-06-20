@@ -12,8 +12,7 @@ public class SunflowerBullet : Bullet
     private bool isMovingToUI = false;
     public float moveSpeedToUI = 25f;
 
-    public AudioClip sunPickup;
-    public AudioSource audioSource;
+   
     private void Start()
     {
         
@@ -28,11 +27,7 @@ public class SunflowerBullet : Bullet
             {
             }
         }
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
+       
 
     }
 
@@ -116,8 +111,8 @@ public class SunflowerBullet : Bullet
 
         if (!isMovingToUI)
         {
-            audioSource.volume = 0.5f;
-            audioSource.PlayOneShot(sunPickup);
+            AudioManager.Instance.PlayCollectSunSound(transform.position);
+
             isMovingToUI = true;
 
         }

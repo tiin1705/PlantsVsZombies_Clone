@@ -10,16 +10,11 @@ public class SunBehavior : MonoBehaviour
     public Transform uiSunTarget;
     private bool isMovingToUI = false;
     public float moveSpeed = 5f;
-    public AudioClip sunPickup;
-    private AudioSource audioSource;
+  
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
+        
     }
     public void SetTargetPosition(Vector3 targetPos)
     {
@@ -42,8 +37,7 @@ public class SunBehavior : MonoBehaviour
 
         if (!isMovingToUI)
         {
-            audioSource.volume = 0.5f;
-            audioSource.PlayOneShot(sunPickup);
+            AudioManager.Instance.PlayCollectSunSound(transform.position);
             isMovingToUI = true;
             Debug.Log("SunBehavior: isMovingToUI = true");
 

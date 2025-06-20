@@ -7,12 +7,19 @@ public class Peashooter : Plant
   
     public Transform bulletSpawnPoint;
     private Animator animator;
+    public AudioClip shootSound;
+    private AudioSource audioSource;
    
     private void Start()
     {
        
         //Debug.Log("Peashooter initialized"); // Thêm dòng này
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        if(audioSource == null )
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     protected override void Update()
@@ -27,6 +34,8 @@ public class Peashooter : Plant
         if (Time.time > lastFireTime + fireRate) // Kiểm tra thời gian bắn
         {
             animator.SetTrigger("Shoot");
+            audioSource.volume = 0.5f;
+            audioSource.PlayOneShot(shootSound);
             lastFireTime = Time.time; // Cập nhật thời gian bắn
         }
 

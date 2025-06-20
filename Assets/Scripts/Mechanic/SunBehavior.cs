@@ -5,13 +5,22 @@ using UnityEngine;
 public class SunBehavior : MonoBehaviour
 {
     public float fallSpeed = 1f;
-    public int sunValue = 50;
+    public int sunValue = 25;
     private Vector3 targetPosition;
     public Transform uiSunTarget;
     private bool isMovingToUI = false;
     public float moveSpeed = 5f;
-   
+    public AudioClip sunPickup;
+    private AudioSource audioSource;
 
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
     public void SetTargetPosition(Vector3 targetPos)
     {
         targetPosition = targetPos;
@@ -33,6 +42,8 @@ public class SunBehavior : MonoBehaviour
 
         if (!isMovingToUI)
         {
+            audioSource.volume = 0.5f;
+            audioSource.PlayOneShot(sunPickup);
             isMovingToUI = true;
             Debug.Log("SunBehavior: isMovingToUI = true");
 
@@ -65,6 +76,7 @@ public class SunBehavior : MonoBehaviour
         if (Vector3.Distance(transform.position, uiWorldPosition) < 0.1f)
         {
             SunManager.Instance.AddSun(sunValue);
+            
             Destroy(gameObject) ;
         }
     }

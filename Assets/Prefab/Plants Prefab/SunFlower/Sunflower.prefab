@@ -196,8 +196,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 60
   cost: 50
-  fireRate: 13
-  cooldown: 7.5
+  fireRate: 12
+  cooldown: 10
   bulletSpeed: 4
   bulletDamage: 0
   bulletSpawnPoint: {fileID: 9015173833563230853}

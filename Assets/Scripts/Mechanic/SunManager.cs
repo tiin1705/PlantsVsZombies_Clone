@@ -8,10 +8,11 @@ public class SunManager : MonoBehaviour
 
     public List<PlantButtonData> plantButton;
     public PlantFactory plantFactory;
+   
 
     private void Start()
     {
-
+      
     }
     private void Update()
     {
@@ -32,6 +33,7 @@ public class SunManager : MonoBehaviour
     public void AddSun(int amount)
     {
         currentSun += amount;
+        
         UpdatePlantButtons();
     }
 

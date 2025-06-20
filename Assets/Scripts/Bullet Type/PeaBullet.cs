@@ -6,6 +6,16 @@ public class PeaBullet : Bullet
 {
     private Vector2 direction;
     private Animator animator;
+    public AudioClip explodeAudio;
+    private AudioSource audioSource;
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
     public override void Initialize(float bulletSpeed, int bulletDamage)
     {
         speed = bulletSpeed;
@@ -30,6 +40,8 @@ public class PeaBullet : Bullet
         if (collision.CompareTag("Zombie"))
         {
             animator.SetTrigger("Explode");
+            audioSource.volume = 0.5f;
+            audioSource.PlayOneShot(explodeAudio);
             StopCoroutine(MoveBullet(direction));
             StartCoroutine(HandleExplosion());
             

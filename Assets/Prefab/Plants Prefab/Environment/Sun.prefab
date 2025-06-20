@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallSpeed: 1
-  sunValue: 50
+  sunValue: 25
   uiSunTarget: {fileID: 0}
-  moveSpeed: 25
+  moveSpeed: 20
+  sunPickup: {fileID: 8300000, guid: a35655af477fa2a45842e5189b75aea4, type: 3}

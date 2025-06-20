@@ -128,6 +128,7 @@ MonoBehaviour:
   fireRate: 1.5
   cooldown: 7.5
   bulletSpawnPoint: {fileID: 3136077064201245423}
+  shootSound: {fileID: 8300000, guid: 17c0d2f007dd7194db3923b62b866aeb, type: 3}
 --- !u!61 &7340462799670903883
 BoxCollider2D:
   m_ObjectHideFlags: 0

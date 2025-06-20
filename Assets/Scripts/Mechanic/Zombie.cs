@@ -21,10 +21,31 @@ public abstract class Zombie : MonoBehaviour
     public float distanceToTarget;
     protected Animator animator;
 
+    public AudioClip zombieEatingAudio, zombieHeadDrop, zombieHatDrop;
+    private AudioSource audioSource;
+   
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
         stateMachine = new ZombieStateMachine(this);
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
+
+    public void EatingSound()
+    {
+        audioSource.clip = zombieEatingAudio;
+        audioSource.loop = true;
+        audioSource.Play();
+  
+    }
+    public void StopEatingSound()
+    {
+        audioSource.Stop();
     }
     protected virtual void Start()
     {
@@ -102,6 +123,8 @@ public abstract class Zombie : MonoBehaviour
             {
                 GameObject zombieHead = Instantiate(headPrefab, spawnPosition, Quaternion.identity);
                 Rigidbody2D rb = zombieHead.GetComponent<Rigidbody2D>();
+                audioSource.volume = 0.5f;
+                audioSource.PlayOneShot(zombieHeadDrop);
                 if(rb != null)
                 {
                     rb.AddForce(new Vector2(Random.Range(-2f, 2f), 4f), ForceMode2D.Impulse); //Tạo lực bay ngẫu nhiên
@@ -119,7 +142,9 @@ public abstract class Zombie : MonoBehaviour
         {
             hasSpawnedHat = true;
             Vector3 spawnPosition = transform.position + new Vector3(0, 1f, 0);
-            if(hatPrefab != null)
+            audioSource.volume = 0.5f;
+            audioSource.PlayOneShot(zombieHatDrop);
+            if (hatPrefab != null)
             {
                 GameObject zombieHat = Instantiate(hatPrefab, spawnPosition, Quaternion.identity); 
                 Rigidbody2D rb = zombieHat.GetComponent<Rigidbody2D>();

@@ -15,9 +15,17 @@ public class PlantPlacer : MonoBehaviour
 
     public delegate void OnCanclePlacingDelegate();
     public OnCanclePlacingDelegate onCanclePlacing;
+
+    public AudioClip plant;
+    private AudioSource audioSource;
     private void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
+        audioSource = GetComponent<AudioSource>();
+        if(audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
 
     }
     void Update()
@@ -37,6 +45,8 @@ public class PlantPlacer : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     PlacePlant(gridPosition); // Đặt cây tại vị trí này
+                    audioSource.volume = 0.5f;
+                    audioSource.PlayOneShot(plant);
                 }
             }
             else

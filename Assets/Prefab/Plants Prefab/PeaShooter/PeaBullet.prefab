@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   damage: 10
+  explodeAudio: {fileID: 8300000, guid: 3066769594b1d654cb89e98a3e09557a, type: 3}
 --- !u!95 &1189523141677572509
 Animator:
   serializedVersion: 5

@@ -204,6 +204,8 @@ MonoBehaviour:
   waitTime: 0
   idleMode: 0
   distanceToTarget: 0
+  zombieEatingAudio: {fileID: 8300000, guid: e4c0f2488568f504bbceb1abb8fd8238, type: 3}
+  zombieHeadDrop: {fileID: 8300000, guid: 4ca58744bc7c90e45a42fe892ecd8b74, type: 3}
   detectionArea: {fileID: 6519172437165449515}
 --- !u!1 &5717610052333752438
 GameObject:

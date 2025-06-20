@@ -1,7 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// Cần nâng cấp => chuyển thông số thành list => tự động hóa tất cả
 public class ZombieSpawner : MonoBehaviour
 {
     public Transform[] spawnPoints;
@@ -12,30 +14,51 @@ public class ZombieSpawner : MonoBehaviour
     private int maxZombiesPerWave;
 
 
- 
+    private Coroutine spawningCoroutine;
+    private bool isSpawning = false;
+
+
 
     public void StartSpawning()
     {
-        StartCoroutine(HandlePhases());
+        if (!isSpawning)
+        {
+            isSpawning = true;
+            spawningCoroutine = StartCoroutine(HandlePhases());
+        }
     }
 
+    public void StopSpawning()
+    {
+        if (isSpawning) 
+        {
+            isSpawning = false;
+            if(spawningCoroutine != null)
+            {
+                StopCoroutine(spawningCoroutine);
+                spawningCoroutine = null;
+            }
+        }
+    }
+    // =>> note nâng cấp thành list
     private IEnumerator HandlePhases()
     {
         //Phase 1: Early Game
-        SetPhaseParameters(60f, 8f, 1, 2);
+        SetPhaseParameters(60f, 20f, 1, 2);
         yield return StartCoroutine(SpawnPhase());
 
         //Phase 2: Early-Mid Game
-        SetPhaseParameters(20f, 8f, 2, 3);
+        SetPhaseParameters(20f, 15f, 2, 3);
         yield return StartCoroutine(SpawnPhase());
 
         //Phase 3: Mid Game
-        SetPhaseParameters(50f, 8f, 3, 4);
+        SetPhaseParameters(50f, 10f, 3, 4);
         yield return StartCoroutine(SpawnPhase());
 
         //Phase 4: Final
-        SetPhaseParameters(37.5f, 5f, 4, 5);
+        SetPhaseParameters(40f, 5f, 4, 5);
         yield return StartCoroutine(SpawnPhase());
+
     }
 
     private void SetPhaseParameters(float phaseDuration, float interval, int minZombies, int maxZombies)
@@ -55,6 +78,7 @@ public class ZombieSpawner : MonoBehaviour
             int zombieToSpawn = Random.Range(minZombiesPerWave, maxZombiesPerWave);
             for(int i = 0; i < zombieToSpawn; i++)
             {
+                if (!isSpawning) yield break;
                 Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
                 bool isConeheadZombie = ShouldSpawnConeHeadZombie();
 
@@ -91,9 +115,20 @@ public class ZombieSpawner : MonoBehaviour
 
     private bool ShouldSpawnConeHeadZombie()
     { 
-        if (currentPhaseDuration == 60f) return false; //Early Game kh�ng spawn ConeHeadZombie
+        if (currentPhaseDuration == 60f) return false; //Early Game không spawn ConeHeadZombie
         if (currentPhaseDuration == 20f) return Random.value < 0.33f; //Early-Mid Game 1:3
         if (currentPhaseDuration == 50f) return Random.value < 0.5f; // Mid Game 1:4
         return Random.value < 0.6f; // Final 2:5
     }
+
+    // lấy thông số của từng phase chuyển qua progres bar
+    public float GetFinalPhaseStartTime()
+    {
+        return 60f + 20f + 50f;
+    }
+
+    public float GetTotalProgressDuration()
+    {
+        return 60f + 20f + 50f + 40f;
+    } 
 }

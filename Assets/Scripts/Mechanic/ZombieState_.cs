@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public abstract class ZombieState_ 
 {
+ 
     public virtual void EnterState(Zombie zombie)
     {
 
@@ -24,6 +26,8 @@ public abstract class ZombieState_
         }
     }
 }
+
+
 
 public class WalkingState : ZombieState_
 {
@@ -142,6 +146,7 @@ public class AttackState : ZombieState_
         zombie.GetComponent<Animator>().SetBool("isWalking", false);
         zombie.GetComponent<Animator>().SetBool("isWaiting", false);
         zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
+        zombie.EatingSound();
 
         // zombie.GetComponent<Animator>().GetFloat("distanceToTarget");
     }
@@ -152,6 +157,7 @@ public class AttackState : ZombieState_
         zombie.GetComponent<Animator>().SetBool("canAttack", false);
         zombie.GetComponent<Animator>().SetBool("isWalking", true);
         zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
+        zombie.StopEatingSound();
 
     }
 
@@ -257,8 +263,35 @@ public class DeadState : ZombieState_
         {
             zombie.Died();
         }
+      
     }
 }
+//public class DeadByBombState : ZombieState_
+//{
+//    public override void EnterState(Zombie zombie)
+//    {
+//        zombie.GetComponent<Animator>().SetBool("isDeadByBomb", true);
+//    }
+
+//    public override void ExitState(Zombie zombie)
+//    {
+//        zombie.GetComponent<Animator>().SetBool("isDeadBybomb", false);
+//    }
+
+//    public override void Handle(Zombie zombie, float health)
+//    {
+//        zombie.GetComponent<Collider2D>().enabled = false;
+//        AnimatorStateInfo stateInfo = zombie.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+//        if (stateInfo.IsName("DeathByBomb") && stateInfo.normalizedTime >= 1.0f)
+//        {
+//            zombie.Died();
+//        }
+
+//    }
+//}
+
+
+
 
 public class IdleState : ZombieState_
 {
@@ -388,7 +421,7 @@ public class HatZAttackState : ZombieState_
         zombie.GetComponent<Animator>().SetBool("isWaiting", false);
         zombie.GetComponent<Animator>().SetBool("isWalking", false);
         zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
-
+        zombie.EatingSound();
     }
 
     public override void ExitState(Zombie zombie)
@@ -397,7 +430,7 @@ public class HatZAttackState : ZombieState_
         zombie.GetComponent<Animator>().SetBool("canAttack", false);
         zombie.GetComponent<Animator>().SetBool("isWalking", true);
         zombie.GetComponent<Animator>().SetFloat("health", zombie.GetHealth());
-
+        zombie.StopEatingSound();
     }
 
     public override void Handle(Zombie zombie, float health)

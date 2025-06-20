@@ -12,6 +12,8 @@ public class SunflowerBullet : Bullet
     private bool isMovingToUI = false;
     public float moveSpeedToUI = 25f;
 
+    public AudioClip sunPickup;
+    public AudioSource audioSource;
     private void Start()
     {
         
@@ -25,6 +27,11 @@ public class SunflowerBullet : Bullet
             else
             {
             }
+        }
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
         }
 
     }
@@ -109,6 +116,8 @@ public class SunflowerBullet : Bullet
 
         if (!isMovingToUI)
         {
+            audioSource.volume = 0.5f;
+            audioSource.PlayOneShot(sunPickup);
             isMovingToUI = true;
 
         }
@@ -132,7 +141,7 @@ public class SunflowerBullet : Bullet
                 // Chỉ thu thập Sun khi viên đạn đã đến gần mục tiêu và người chơi đã nhấp vào viên đạn
                 if (isMovingToUI)
                 {
-                    SunManager.Instance.AddSun(50);  // Cộng thêm Sun
+                    SunManager.Instance.AddSun(25);  // Cộng thêm Sun
                     BulletPool.Instance.ReturnBullet(this);  // Trả lại viên đạn vào pool
                 }
             }

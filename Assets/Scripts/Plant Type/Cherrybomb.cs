@@ -6,6 +6,7 @@ public class CherryBomb : Plant
 {
     public Transform bulletSpawnPoint;
     private Animator animator;
+    public bool DeadByBomb = false;
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -39,6 +40,9 @@ public class CherryBomb : Plant
         }
     }
  
-
+    public void DeadCheck()
+    {
+        DeadByBomb = true;
+    }
   
 }

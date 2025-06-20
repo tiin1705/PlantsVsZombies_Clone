@@ -7,12 +7,20 @@ public class UIManager : MonoBehaviour
     PlantPlacer plantPlacer;
     private bool isPlacingPlant = false;
 
+    public AudioClip plant;
+    private AudioSource audioSource;
     private void Start()
     {
         plantPlacer = FindObjectOfType<PlantPlacer>();
         if(plantPlacer != null)
         {
             plantPlacer.onCanclePlacing += OnCanclePlacing;
+        }
+
+        audioSource = GetComponent<AudioSource>();
+        if(audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
         }
     }
 
@@ -55,6 +63,8 @@ public class UIManager : MonoBehaviour
         {
             isPlacingPlant = true;
             plantPlacer.StartingPlacingPlant(plantType);
+            audioSource.volume = 0.5f;
+            audioSource.PlayOneShot(plant);
         }
         else
         {

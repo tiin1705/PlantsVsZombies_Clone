@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private ZombieSpawner zombieSpawner;
     [SerializeField] private float preparationTime = 20f;
 
+    [SerializeField] private ProgressBarController progressBarController;
+
     private void Awake()
     {
         if(instance == null)
@@ -64,6 +66,8 @@ public class GameController : MonoBehaviour
     private IEnumerator HandlePreparationPhase()
     {
         yield return new WaitForSeconds(preparationTime);
+        progressBarController.gameObject.SetActive(true);
+        progressBarController.StartProgress();
         ChangeState(GameState.EarlyGame);
     }
 
@@ -134,5 +138,6 @@ public class GameController : MonoBehaviour
     private void HandleGameOver()
     {
         Debug.Log("Game Kết thúc");
+        zombieSpawner.StopSpawning();
     }
 }

@@ -140,4 +140,10 @@ public class GameController : MonoBehaviour
         Debug.Log("Game Kết thúc");
         zombieSpawner.StopSpawning();
     }
+
+    public void OnZombieReachedEndPoint(){
+        if(currentState != GameState.GameOver){
+            ChangeState(GameState.GameOver);
+        }
+    }
 }

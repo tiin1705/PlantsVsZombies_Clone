@@ -13,7 +13,7 @@ public class NormalZombie : Zombie
        
         if(animator == null)
         {
-            Debug.Log("Animator not found in NormalZombie"); 
+            // Debug.Log("Animator not found in NormalZombie"); 
         }
     }
     public override void Attack()

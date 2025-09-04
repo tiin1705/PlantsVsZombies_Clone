@@ -99,7 +99,7 @@ public class PlantPlacer : MonoBehaviour
         {
             if (collider.CompareTag("Plant")) // Nếu có cây ở vị trí đó
             {
-                Debug.Log("Không thể đặt cây ở vị trí này! Đã có cây ở đây");
+                // Debug.Log("Không thể đặt cây ở vị trí này! Đã có cây ở đây");
                 return; // Không đặt cây
             }
         }
@@ -119,7 +119,7 @@ public class PlantPlacer : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Plant creation failed!");
+                // Debug.LogError("Plant creation failed!");
             }
 
             // Huỷ bóng mờ và kết thúc quá trình đặt
@@ -132,7 +132,7 @@ public class PlantPlacer : MonoBehaviour
         }
         else
         {
-            Debug.Log("Không đủ Sun để đặt cây!");
+            // Debug.Log("Không đủ Sun để đặt cây!");
         }
     }
 

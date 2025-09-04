@@ -39,16 +39,16 @@ public class SunBehavior : MonoBehaviour
         {
             AudioManager.Instance.PlayCollectSunSound(transform.position);
             isMovingToUI = true;
-            Debug.Log("SunBehavior: isMovingToUI = true");
+           // Debug.Log("SunBehavior: isMovingToUI = true");
 
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Triggered with " + other.gameObject.name);
+        // Debug.Log("Triggered with " + other.gameObject.name);
         if (other.CompareTag("Sun"))
         {
-            Debug.Log("Sun picked up: " + other.gameObject.name);
+            // Debug.Log("Sun picked up: " + other.gameObject.name);
         }
     }
 

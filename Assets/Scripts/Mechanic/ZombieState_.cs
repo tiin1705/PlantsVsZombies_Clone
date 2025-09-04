@@ -178,7 +178,7 @@ public class AttackState : ZombieState_
             {
                 if (Time.time > zombie.GetLastAttackTime() + zombie.GetAttackRate())
                 {
-                    Debug.Log("Zombie Attacking");
+                    // Debug.Log("Zombie Attacking");
                     zombie.Attack();
                     zombie.SetLastAttackTime(Time.time);
                 }

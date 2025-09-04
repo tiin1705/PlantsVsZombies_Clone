@@ -38,11 +38,11 @@ public class LawnMoverSpawnManager : MonoBehaviour
 
     private void StartSpawning(){
         if(lawnMoverPrefab == null){
-            Debug.LogError("LawnMoverPrefab is not set");
+            // Debug.LogError("LawnMoverPrefab is not set");
             return;
         }
         if(startSpawnPoints.Length != 5 || targetSpawnPoints.Length != 5){
-             Debug.LogError("Need exactly 5 start spawn points and 5 target spawn points!");
+             // Debug.LogError("Need exactly 5 start spawn points and 5 target spawn points!");
             return;
         }
         spawnCoroutine = StartCoroutine(SpawnLawnMoversContinuously());
@@ -55,7 +55,7 @@ public class LawnMoverSpawnManager : MonoBehaviour
             currentLaneIndex = (currentLaneIndex + 1) % startSpawnPoints.Length;
             
             spawnedCount++;
-            Debug.Log($"Spawned lawn mover {spawnedCount}/{maxLawnMovers}");
+            // Debug.Log($"Spawned lawn mover {spawnedCount}/{maxLawnMovers}");
             
            
             if (i < maxLawnMovers - 1)
@@ -80,7 +80,7 @@ public class LawnMoverSpawnManager : MonoBehaviour
     
     private void SpawnLawnMoverToLane(int laneIndex){
         if(startSpawnPoints[laneIndex] == null || targetSpawnPoints[laneIndex] == null){ 
-            Debug.LogWarning($"Start or target spawn point for lane {laneIndex} is not set");
+            // Debug.LogWarning($"Start or target spawn point for lane {laneIndex} is not set");
             return;
             }
         Vector3 startPosition = startSpawnPoints[laneIndex].position + Vector3.up * spawnYOffset;
@@ -107,7 +107,7 @@ public class LawnMoverSpawnManager : MonoBehaviour
         if(spawnCoroutine != null){
             StopCoroutine(spawnCoroutine);
             spawnCoroutine = null;
-            Debug.Log("Lawn mover spawning stopped");
+            // Debug.Log("Lawn mover spawning stopped");
         }
     }
     private void OnDestroy(){

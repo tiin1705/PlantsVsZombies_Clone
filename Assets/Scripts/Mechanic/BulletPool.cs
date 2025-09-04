@@ -52,7 +52,7 @@ public class BulletPool : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No bullets available in the pool for type: " + bulletType);
+            // Debug.LogWarning("No bullets available in the pool for type: " + bulletType);
             return null;
         }
     }
@@ -71,7 +71,7 @@ public class BulletPool : MonoBehaviour
             return;
         }
 
-        Debug.LogWarning("Bullet type not found in any pool: " + bulletType);
+        // Debug.LogWarning("Bullet type not found in any pool: " + bulletType);
     }
 
 }

@@ -55,7 +55,7 @@ public abstract class Zombie : MonoBehaviour
     }
     public void ChangeState(ZombieState_ newState)
     {
-        Debug.Log($"Zombie changing state from {currentState?.GetType().Name} to {newState.GetType().Name}");
+        // Debug.Log($"Zombie changing state from {currentState?.GetType().Name} to {newState.GetType().Name}");
 
         stateMachine.ChangeState(newState); // sử dụng state machine để thay đổi trạng thái
     }

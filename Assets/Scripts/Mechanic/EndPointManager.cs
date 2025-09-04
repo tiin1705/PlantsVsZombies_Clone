@@ -24,12 +24,12 @@ public class EndPointManager : MonoBehaviour
 
     private void ValidateEndPoint(){
         if(endPoint == null){
-            Debug.Log("EndPoint is not assigned");
+            // Debug.Log("EndPoint is not assigned");
         }
     }
 
     public void OnZombieReachedEndPoint(){
-        Debug.Log("Zombie reached the end point! Game Over!");
+        // Debug.Log("Zombie reached the end point! Game Over!");
         if(GameController.instance != null){
             GameController.instance.OnZombieReachedEndPoint();
         }

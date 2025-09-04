@@ -57,6 +57,6 @@ public class ZombiePool : MonoBehaviour
             return;
         }
 
-        Debug.LogWarning("Zombie type not found in any pool: " + zombieType);
+        // Debug.LogWarning("Zombie type not found in any pool: " + zombieType);
     }
 }

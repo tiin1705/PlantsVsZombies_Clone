@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     public enum GameState { Preparing, EarlyGame, EarlyMidGame, MidGame, Final, GameOver}
     public GameState currentState;
+    private GameState previousState;
 
     [SerializeField] private ZombieSpawner zombieSpawner;
     [SerializeField] private float preparationTime = 20f;
@@ -29,7 +30,11 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Current State: " +  currentState);
+        if(currentState != previousState && currentState != GameState.GameOver)
+        {
+            Debug.Log("Current State: " + currentState);
+            previousState = currentState;
+        }
     }
 
     private void Start()
@@ -61,6 +66,10 @@ public class GameController : MonoBehaviour
                 HandleGameOver();
                 break;
         }
+          // if(currentState != GameState.GameOver)
+        // {
+        //     Debug.Log("State changed to: " + currentState);
+        // }
     }
 
     private IEnumerator HandlePreparationPhase()
@@ -137,13 +146,22 @@ public class GameController : MonoBehaviour
     }
     private void HandleGameOver()
     {
-        Debug.Log("Game Kết thúc");
-        zombieSpawner.StopSpawning();
+        // Debug.Log("Game Kết thúc");
+        if(GameManager.instance != null){
+        GameManager.instance.StopAllGameSystems();
+        }
+        StopAllCoroutines();
     }
 
     public void OnZombieReachedEndPoint(){
         if(currentState != GameState.GameOver){
             ChangeState(GameState.GameOver);
+        }
+    }
+
+    public void ResumeGame(){
+        if(GameManager.instance != null){
+            GameManager.instance.ResumeAllGameSystems();
         }
     }
 }

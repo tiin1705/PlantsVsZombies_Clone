@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("PlantPlacer not found");
+            // Debug.Log("PlantPlacer not found");
         }
     }
     private void OnCanclePlacing()

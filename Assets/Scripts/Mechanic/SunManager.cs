@@ -39,12 +39,12 @@ public class SunManager : MonoBehaviour
 
     public bool SpendSun(int amount)
     {
-        Debug.Log($"Current Sun: {currentSun}, Cost: {amount}");
+        // Debug.Log($"Current Sun: {currentSun}, Cost: {amount}");
 
         if (currentSun >= amount)
         {
             currentSun -= amount;
-            Debug.Log($"Sun spent. Remaining Sun: {currentSun}");
+            // Debug.Log($"Sun spent. Remaining Sun: {currentSun}");
             UpdatePlantButtons();
             return true;
 
@@ -91,10 +91,10 @@ public class SunManager : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Triggered with " + other.gameObject.name);
+        // Debug.Log("Triggered with " + other.gameObject.name);
         if (other.CompareTag("Sun"))
         {
-            Debug.Log("Sun picked up: " + other.gameObject.name);
+            // Debug.Log("Sun picked up: " + other.gameObject.name);
         }
     }
 

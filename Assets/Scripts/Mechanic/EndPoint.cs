@@ -9,7 +9,7 @@ public class EndPoint : MonoBehaviour
         if(collider.CompareTag("Zombie")){
             Zombie zombie = collider.GetComponent<Zombie>();
             if(zombie != null && !zombie.IsDead()){
-                Debug.Log("Zombie reached the end point");
+                // Debug.Log("Zombie reached the end point");
 
                 if(EndPointManager.instance != null){
                     EndPointManager.instance.OnZombieReachedEndPoint();

@@ -87,6 +87,14 @@ public class GameManager : MonoBehaviour
                 bullet.enabled = true;
             }
         }
+        
+    }
+
+    public bool IsGameOver(){
+        if(GameController.instance != null){
+            return GameController.instance.IsGameOver();
+        }
+        return false;
     }
 
 

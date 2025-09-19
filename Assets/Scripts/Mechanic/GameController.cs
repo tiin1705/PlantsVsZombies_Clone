@@ -147,6 +147,10 @@ public class GameController : MonoBehaviour
     private void HandleGameOver()
     {
         // Debug.Log("Game Kết thúc");
+
+        if(zombieSpawner != null){
+            zombieSpawner.StopSpawning();
+        }
         if(GameManager.instance != null){
         GameManager.instance.StopAllGameSystems();
         }
@@ -163,5 +167,9 @@ public class GameController : MonoBehaviour
         if(GameManager.instance != null){
             GameManager.instance.ResumeAllGameSystems();
         }
+    }
+
+    public bool IsGameOver(){
+        return currentState == GameState.GameOver;
     }
 }

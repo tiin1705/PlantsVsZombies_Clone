@@ -13,23 +13,56 @@ public class SunSpawner : MonoBehaviour
     public float fallRangeMaxY;
     public Transform uiSunTarget;
 
+    private Coroutine spawnCoroutine;
+    private bool isSpawning = false;
+
     private void Start()
     {
-        StartCoroutine(SpawnSunRoutine());
+        StartSpawning();
+    }
+
+    public void StartSpawning()
+    {
+        if (!isSpawning)
+        {
+            isSpawning = true;
+            spawnCoroutine = StartCoroutine(SpawnSunRoutine());
+        }
+    }
+
+    public void StopSpawning()
+    {
+        isSpawning = false;
+        if (spawnCoroutine != null)
+        {
+            StopCoroutine(spawnCoroutine);
+            spawnCoroutine = null;
+        }
     }
 
     private IEnumerator SpawnSunRoutine()
     {
-        while (true)
+        while (isSpawning)
         {
+            // Kiểm tra game state trước khi spawn
+            if (GameManager.instance != null && GameManager.instance.IsGameOver())
+            {
+                yield break; // Dừng coroutine nếu game over
+            }
+
             SpawnSun();
             yield return new WaitForSeconds(spawnInterval);
         }
-       
     }
 
     private void SpawnSun()
     {
+        // Kiểm tra game state trước khi spawn
+        if (GameManager.instance != null && GameManager.instance.IsGameOver())
+        {
+            return; // Không spawn nếu game over
+        }
+
         Bounds bounds = spawnArea.bounds;
 
         float randomX = Random.Range(bounds.min.x, bounds.max.x);

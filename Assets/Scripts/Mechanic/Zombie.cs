@@ -36,6 +36,8 @@ public abstract class Zombie : MonoBehaviour
         }
     }
 
+   
+
     public void EatingSound()
     {
         audioSource.clip = zombieEatingAudio;
@@ -49,6 +51,7 @@ public abstract class Zombie : MonoBehaviour
     }
     protected virtual void Start()
     {
+        CheckGameState();
         stateMachine.ChangeState(new IdleState());
         detectionArea = GetComponentInChildren<DetectionArea>();
         
@@ -259,6 +262,12 @@ public abstract class Zombie : MonoBehaviour
     {
 
         return detectionArea.HasPlantInRange();
+    }
+
+    private void CheckGameState(){
+        if(GameManager.instance != null && GameManager.instance.IsGameOver()){
+            enabled = false;
+        }
     }
 
 }

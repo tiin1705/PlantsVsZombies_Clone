@@ -16,6 +16,9 @@ public class PlantPlacer : MonoBehaviour
     public delegate void OnCanclePlacingDelegate();
     public OnCanclePlacingDelegate onCanclePlacing;
 
+    public GameObject plantingEffectPrefab;
+    public float plantingEffectYOffset = -0.2f;
+
     public AudioClip plant;
     private AudioSource audioSource;
     private void Start()
@@ -99,7 +102,7 @@ public class PlantPlacer : MonoBehaviour
         {
             if (collider.CompareTag("Plant")) // Nếu có cây ở vị trí đó
             {
-                // Debug.Log("Không thể đặt cây ở vị trí này! Đã có cây ở đây");
+                Debug.Log("Không thể đặt cây ở vị trí này! Đã có cây ở đây");
                 return; // Không đặt cây
             }
         }
@@ -114,12 +117,16 @@ public class PlantPlacer : MonoBehaviour
             Plant plant = PlantFactory.CreatePlant(selectedPlantType);
             if (plant != null)
             {
+                if(plantingEffectPrefab != null){
+                    var fx = Instantiate(plantingEffectPrefab, position + Vector3.up * plantingEffectYOffset, Quaternion.identity);
+                    Destroy(fx, 0.2f);
+                }
                 plant.transform.position = position;
                 StartCooldownForPlant(selectedPlantType);
             }
             else
             {
-                // Debug.LogError("Plant creation failed!");
+                Debug.LogError("Plant creation failed!");
             }
 
             // Huỷ bóng mờ và kết thúc quá trình đặt
@@ -132,7 +139,7 @@ public class PlantPlacer : MonoBehaviour
         }
         else
         {
-            // Debug.Log("Không đủ Sun để đặt cây!");
+            Debug.Log("Không đủ Sun để đặt cây!");
         }
     }
 

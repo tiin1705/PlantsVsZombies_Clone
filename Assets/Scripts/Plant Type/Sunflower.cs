@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Sunflower : Plant
@@ -11,36 +13,30 @@ public class Sunflower : Plant
 
     private void Start()
     {
-       
-        StartCoroutine(ProductSunLight());
-
+        StartCoroutine(ProduceSunLoop());
     }
+
     public override void Attack()
     {
-
     }
 
-
-    private IEnumerator ProductSunLight()
+    private void ProduceSun()
     {
-        while (true)
+        Bullet bullet = BulletPool.Instance.GetBullet("SunflowerBullet");
+        if (bullet != null)
         {
-            yield return new WaitForSeconds(fireRate);
-            Bullet bullet = BulletPool.Instance.GetBullet("SunflowerBullet"); //Lấy viên đạn mặt trời từ pool
-            if (bullet != null)
-            {
-                bullet.transform.position = bulletSpawnPoint.position;
-                bullet.Initialize(bulletSpeed, bulletDamage);
-                bullet.Fire(transform.up); //Bắn vị trí hướng lên trên
-               // Debug.Log("Sunflower produced sunlight");
-
-            }
-            else
-            {
-             //  Debug.Log("No bullet available in the pool");
-
-            }
+            bullet.transform.position = bulletSpawnPoint.position;
+            bullet.Initialize(bulletSpeed, bulletDamage);
+            bullet.Fire(transform.up);
         }
     }
 
+    private IEnumerator ProduceSunLoop()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Mathf.Max(0f, fireRate));
+            ProduceSun();
+        }
+    }
 }

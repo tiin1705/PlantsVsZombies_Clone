@@ -22,6 +22,14 @@ public class SunBehavior : MonoBehaviour
     }
     private void Update()
     {
+        if(GameManager.instance != null && GameManager.instance.IsGameOver()){
+            Animator anim = GetComponent<Animator>();
+            if(anim != null) anim.speed = 0f;
+            return;
+        }else{
+            Animator anim = GetComponent<Animator>();
+            if(anim != null) anim.speed = 1f;
+        }
         if (isMovingToUI)
         {
             MoveSunToUI();

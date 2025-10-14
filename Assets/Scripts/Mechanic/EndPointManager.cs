@@ -32,6 +32,7 @@ public class EndPointManager : MonoBehaviour
         // Debug.Log("Zombie reached the end point! Game Over!");
         if(GameController.instance != null){
             GameController.instance.OnZombieReachedEndPoint();
+
         }
     }
 }

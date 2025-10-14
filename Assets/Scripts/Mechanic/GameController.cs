@@ -151,9 +151,12 @@ public class GameController : MonoBehaviour
         if(zombieSpawner != null){
             zombieSpawner.StopSpawning();
         }
-        if(GameManager.instance != null){
-        GameManager.instance.StopAllGameSystems();
+        Time.timeScale = 0f;
+        AudioListener.pause = true;
+        if(progressBarController != null){
+            progressBarController.EndProgessWhenZombieReachEndPoint();
         }
+       
         StopAllCoroutines();
     }
 
@@ -164,12 +167,13 @@ public class GameController : MonoBehaviour
     }
 
     public void ResumeGame(){
-        if(GameManager.instance != null){
-            GameManager.instance.ResumeAllGameSystems();
-        }
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
     }
 
     public bool IsGameOver(){
         return currentState == GameState.GameOver;
     }
+
+   
 }

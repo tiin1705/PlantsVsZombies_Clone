@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SunSpawner : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class SunSpawner : MonoBehaviour
 
     private Coroutine spawnCoroutine;
     private bool isSpawning = false;
-
+    
     private void Start()
     {
         StartSpawning();
@@ -54,6 +55,7 @@ public class SunSpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
     }
+
 
     private void SpawnSun()
     {

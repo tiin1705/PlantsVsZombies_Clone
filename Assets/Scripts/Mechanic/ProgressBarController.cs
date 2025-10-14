@@ -58,4 +58,9 @@ public class ProgressBarController : MonoBehaviour
         progressBarFill.fillAmount = 0f;
        
     }
+
+    public void EndProgessWhenZombieReachEndPoint()
+    {
+        isRuninng = false;
+    }
 }

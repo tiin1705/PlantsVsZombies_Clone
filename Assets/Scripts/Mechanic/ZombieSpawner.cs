@@ -16,7 +16,15 @@ public class ZombieSpawner : MonoBehaviour
 
     private Coroutine spawningCoroutine;
     private bool isSpawning = false;
+    private int currentPhase = 0;
 
+
+    private readonly PhaseData[] phases = new PhaseData[]{
+        new PhaseData(60f, 20f, 1, 2),
+        new PhaseData(20f, 15f, 2, 3),
+        new PhaseData(50f, 10f, 3, 4),
+        new PhaseData(40f, 5f, 4, 5),
+    };
 
 
     public void StartSpawning()
@@ -27,10 +35,24 @@ public class ZombieSpawner : MonoBehaviour
             spawningCoroutine = StartCoroutine(HandlePhases());
         }
     }
+    [System.Serializable]
+    private struct PhaseData{
+        public float duration;
+        public float interval;
+        public int minZombies;
+        public int maxZombies;
 
+
+        public PhaseData(float duration, float interval, int minZombies, int maxZombies){
+            this.duration = duration;
+            this.interval = interval;
+            this.minZombies = minZombies;
+            this.maxZombies = maxZombies;
+        }
+    }
     public void StopSpawning()
     {
-        if (isSpawning) 
+        if (isSpawning)
         {
             isSpawning = false;
             if(spawningCoroutine != null)
@@ -40,39 +62,26 @@ public class ZombieSpawner : MonoBehaviour
             }
         }
     }
-    // =>> note nâng cấp thành list
     private IEnumerator HandlePhases()
     {
-        //Phase 1: Early Game
-        SetPhaseParameters(60f, 20f, 1, 2);
+       for(int phaseIndex = currentPhase; phaseIndex < phases.Length; phaseIndex++){
+        currentPhase = phaseIndex;
+        SetPhaseParameters(phases[phaseIndex]);
         yield return StartCoroutine(SpawnPhase());
-
-        //Phase 2: Early-Mid Game
-        SetPhaseParameters(20f, 15f, 2, 3);
-        yield return StartCoroutine(SpawnPhase());
-
-        //Phase 3: Mid Game
-        SetPhaseParameters(50f, 10f, 3, 4);
-        yield return StartCoroutine(SpawnPhase());
-
-        //Phase 4: Final
-        SetPhaseParameters(40f, 5f, 4, 5);
-        yield return StartCoroutine(SpawnPhase());
+       }
 
     }
 
-    private void SetPhaseParameters(float phaseDuration, float interval, int minZombies, int maxZombies)
-    {
-        currentPhaseDuration = phaseDuration;
-        spawnInterval = interval;
-        minZombiesPerWave = minZombies;
-        maxZombiesPerWave = maxZombies;
+    private void SetPhaseParameters(PhaseData phaseData){
+        currentPhaseDuration = phaseData.duration;
+        spawnInterval = phaseData.interval;
+        minZombiesPerWave = phaseData.minZombies;
+        maxZombiesPerWave = phaseData.maxZombies;
     }
     
     private IEnumerator SpawnPhase()
     {
         float elapsedTime = 0f;
-
         while(elapsedTime < currentPhaseDuration)
         {
             int zombieToSpawn = Random.Range(minZombiesPerWave, maxZombiesPerWave);

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8528262213624066636}
   - component: {fileID: 2812654271203868682}
   - component: {fileID: 8260168779378949943}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sunflower
   m_TagString: Plant
   m_Icon: {fileID: 0}
@@ -201,9 +201,6 @@ MonoBehaviour:
   bulletSpeed: 4
   bulletDamage: 0
   bulletSpawnPoint: {fileID: 9015173833563230853}
-  preGlowColor: {r: 1, g: 1, b: 0.3137255, a: 1}
-  preGlowDuration: 1
-  glowIntensity: 30.9
 --- !u!1 &8376090737107866488
 GameObject:
   m_ObjectHideFlags: 0

@@ -43,7 +43,11 @@ public class PlantPlacer : MonoBehaviour
             {
                 Vector3 gridPosition = GetGridPosition(hit2D.point);
                 plantGhosts.transform.position = gridPosition;
-
+                
+                if(Input.GetMouseButtonDown(1)){
+                    CancelPlacing();
+                    return;
+                }
                 // Kiểm tra nếu người dùng nhấp chuột để đặt cây
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -55,7 +59,7 @@ public class PlantPlacer : MonoBehaviour
             else
             {
                 // Nếu nhấp ra ngoài grid, ẩn bóng mờ và quay lại trạng thái chưa chọn
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
                 {
                     CancelPlacing(); // Hủy quá trình đặt cây
                 }
@@ -164,6 +168,7 @@ public class PlantPlacer : MonoBehaviour
 
     void CancelPlacing()
     {
+        
         Destroy(plantGhosts); // Xóa bóng mờ
         isPlacing = false; // Quay lại trạng thái chưa chọn cây
         if (onCanclePlacing != null)
@@ -182,5 +187,10 @@ public class PlantPlacer : MonoBehaviour
             }
         }
     }
+    public void CancelPlacingExternally()
+{
+	if (!isPlacing) return;
+	CancelPlacing();
+}
 
 }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+
 
 public class PauseMenu : MonoBehaviour
 {
@@ -38,6 +40,7 @@ public class PauseMenu : MonoBehaviour
      if (pauseRoot != null) pauseRoot.SetActive(false); // ẨN MENU
      Time.timeScale = 1f;
      AudioListener.pause = false;
+     OnButtonClicked();
    }
 
     public void Restart(){
@@ -45,9 +48,15 @@ public class PauseMenu : MonoBehaviour
         AudioListener.pause = false;
         var scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.buildIndex);
+        OnButtonClicked();
     }
    public void QuitToMenu(){
      Application.Quit();
+     OnButtonClicked();
+   }
+
+   public void OnButtonClicked(){
+     EventSystem.current.SetSelectedGameObject(null);
    }
         
 }

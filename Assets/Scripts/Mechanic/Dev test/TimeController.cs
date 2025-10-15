@@ -12,18 +12,11 @@ public class TimeController : MonoBehaviour
     [SerializeField] private float normalTimeScale = 1f;
     [SerializeField] private float fastTimeScale = 2f;
     [SerializeField] private float superFastTimeScale = 4f;
+    [SerializeField] private GameOverTransition gameOverTransition;
+
 
 
     private float currentTimeScale = 1f;
-    private void Awake(){
-        if(Instance == null){
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else{
-            Destroy(gameObject);
-        }
-    }
 
     private void Start(){
         SetNormalSpeed();
@@ -37,7 +30,13 @@ public class TimeController : MonoBehaviour
             SetFastSpeed();
         }
         else if(Input.GetKeyDown(KeyCode.Alpha3)){
-            SetSuperFastSpeed();
+            if (gameOverTransition != null){
+		Debug.Log("3 pressed -> StartGameOverTransition");
+		gameOverTransition.gameObject.SetActive(true);
+		gameOverTransition.StartGameOverTransition();
+	}else{
+		Debug.LogWarning("Serialized GameOverTransition is null. Assign it in the Inspector.");
+	}
         }
     }
 

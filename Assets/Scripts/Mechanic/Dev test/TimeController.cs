@@ -30,13 +30,7 @@ public class TimeController : MonoBehaviour
             SetFastSpeed();
         }
         else if(Input.GetKeyDown(KeyCode.Alpha3)){
-            if (gameOverTransition != null){
-		Debug.Log("3 pressed -> StartGameOverTransition");
-		gameOverTransition.gameObject.SetActive(true);
-		gameOverTransition.StartGameOverTransition();
-	}else{
-		Debug.LogWarning("Serialized GameOverTransition is null. Assign it in the Inspector.");
-	}
+            SetSuperFastSpeed();
         }
     }
 

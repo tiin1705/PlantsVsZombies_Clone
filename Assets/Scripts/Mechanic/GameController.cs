@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement; // thêm
 
 public class GameController : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private float preparationTime = 20f;
 
     [SerializeField] private ProgressBarController progressBarController;
-
+    [SerializeField] private GameOverTransition gameOverTransition;
     private void Awake()
     {
         if(instance == null)
@@ -28,6 +29,30 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void OnEnable(){
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable(){
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode){
+        // Rebind references thuộc scene mới
+        if (zombieSpawner == null) zombieSpawner = FindObjectOfType<ZombieSpawner>(true);
+        if (progressBarController == null) progressBarController = FindObjectOfType<ProgressBarController>(true);
+        if (gameOverTransition == null) gameOverTransition = FindObjectOfType<GameOverTransition>(true);
+        // Reset trạng thái runtime
+        previousState = GameState.Preparing;
+        currentState = GameState.Preparing;
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
+
+        // Khởi động lại flow
+        StopAllCoroutines();
+        ChangeState(GameState.Preparing);
+    }
+
     private void Update()
     {
         if(currentState != previousState && currentState != GameState.GameOver)
@@ -39,6 +64,10 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        // Với instance đầu tiên (lần đầu vào game)
+        if (zombieSpawner == null) zombieSpawner = FindObjectOfType<ZombieSpawner>(true);
+        if (progressBarController == null) progressBarController = FindObjectOfType<ProgressBarController>(true);
+        if (gameOverTransition == null) gameOverTransition = FindObjectOfType<GameOverTransition>(true);
         ChangeState(GameState.Preparing);
     }
 
@@ -66,23 +95,21 @@ public class GameController : MonoBehaviour
                 HandleGameOver();
                 break;
         }
-          // if(currentState != GameState.GameOver)
-        // {
-        //     Debug.Log("State changed to: " + currentState);
-        // }
     }
 
     private IEnumerator HandlePreparationPhase()
     {
         yield return new WaitForSeconds(preparationTime);
-        progressBarController.gameObject.SetActive(true);
-        progressBarController.StartProgress();
+        if (progressBarController != null){
+            progressBarController.gameObject.SetActive(true);
+            progressBarController.StartProgress();
+        }
         ChangeState(GameState.EarlyGame);
     }
 
     private void StartPlaying()
     {
-        Zombie[] allZombies = FindObjectsOfType<Zombie>();
+        Zombie[] allZombies = FindObjectsOfType<Zombie>(true);
         foreach(Zombie zombie in allZombies)
         {
             if(zombie.GetHealth() > 100)
@@ -95,8 +122,6 @@ public class GameController : MonoBehaviour
             }
         }
     }
-
-   
 
     public void AdvanceToNextPhase()
     {
@@ -118,36 +143,30 @@ public class GameController : MonoBehaviour
     
     private void StartEarlyGame()
     {
-        zombieSpawner.StartSpawning();
+        if (zombieSpawner != null) zombieSpawner.StartSpawning();
         StartPlaying();
         StartCoroutine(TransitionAfterPhase(60f, GameState.EarlyMidGame));
-        
     }
     private void StartEarlyMidGame()
     {
-        zombieSpawner.StartSpawning();
+        if (zombieSpawner != null) zombieSpawner.StartSpawning();
         StartPlaying();
         StartCoroutine(TransitionAfterPhase(20f, GameState.MidGame));
-       
     }
     private void StartMidGame()
     {
-        zombieSpawner.StartSpawning();
+        if (zombieSpawner != null) zombieSpawner.StartSpawning();
         StartPlaying();
         StartCoroutine(TransitionAfterPhase(50f, GameState.Final));
-       
     }
     private void StartFinalGame()
     {
-        zombieSpawner.StartSpawning();
+        if (zombieSpawner != null) zombieSpawner.StartSpawning();
         StartPlaying();
         StartCoroutine(TransitionAfterPhase(37.5f, GameState.GameOver));
-       
     }
     private void HandleGameOver()
     {
-        // Debug.Log("Game Kết thúc");
-
         if(zombieSpawner != null){
             zombieSpawner.StopSpawning();
         }
@@ -156,8 +175,11 @@ public class GameController : MonoBehaviour
         if(progressBarController != null){
             progressBarController.EndProgessWhenZombieReachEndPoint();
         }
-       
         StopAllCoroutines();
+        if(gameOverTransition != null){
+		    gameOverTransition.gameObject.SetActive(true);
+		    gameOverTransition.StartGameOverTransition();
+        }
     }
 
     public void OnZombieReachedEndPoint(){
@@ -174,6 +196,4 @@ public class GameController : MonoBehaviour
     public bool IsGameOver(){
         return currentState == GameState.GameOver;
     }
-
-   
 }

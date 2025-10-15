@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameOverTransition : MonoBehaviour
 {
     public Image gameOverSprite;
+    public Image gameOverMenu;
     public float duration = 2f;
 
     [SerializeField] private float shakeDuration = 0.6f;
@@ -18,6 +19,7 @@ public class GameOverTransition : MonoBehaviour
         Time.timeScale = 0f;
         gameObject.SetActive(true);
         StartCoroutine(FadeInSprite());
+        
     }
 
     
@@ -36,7 +38,24 @@ public class GameOverTransition : MonoBehaviour
             gameOverSprite.rectTransform.anchoredPosition = Vector3.Lerp(startPos, endPos, c.a);
             yield return null;
         }
-        yield return StartCoroutine(ShakeSprite(gameOverSprite.rectTransform, shakeDuration, shakeMagnitude, shakeRotation, shakeFrequency));
+         StartCoroutine(ShakeSprite(gameOverSprite.rectTransform, shakeDuration, shakeMagnitude, shakeRotation, shakeFrequency));
+        yield return new WaitForSecondsRealtime(2f);
+        gameOverSprite.gameObject.SetActive(false);
+        StartCoroutine(FadeInMenu());
+    }
+    private IEnumerator FadeInMenu(){
+        gameOverMenu.gameObject.SetActive(true);
+        Color c = gameOverMenu.color;
+        c.a = 0;
+        gameOverSprite.color = c;
+        Vector2 startPos = gameOverMenu.rectTransform.anchoredPosition - new Vector2(0, 200);
+        Vector2 endPos = gameOverMenu.rectTransform.anchoredPosition;
+        while(c.a < 1){
+            c.a += Time.unscaledDeltaTime * 2f;
+            gameOverMenu.color = c;
+            gameOverMenu.rectTransform.anchoredPosition = Vector3.Lerp(startPos, endPos, c.a);
+            yield return null;
+        }
     }
     private IEnumerator ShakeSprite(RectTransform rt, float dur, float magnitude, float rotDeg, float freq){
 		Vector2 basePos = rt.anchoredPosition;

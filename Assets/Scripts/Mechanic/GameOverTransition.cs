@@ -7,6 +7,8 @@ public class GameOverTransition : MonoBehaviour
 {
     public Image gameOverSprite;
     public Image gameOverMenu;
+
+    public Image victoryMenu;
     public float duration = 2f;
 
     [SerializeField] private float shakeDuration = 0.6f;
@@ -87,5 +89,27 @@ public class GameOverTransition : MonoBehaviour
 		rt.anchoredPosition = basePos;
 		rt.localRotation = baseRot;
 	}
+
+    public void StartVictoryTransition(){
+        Time.timeScale = 0f;
+        gameObject.SetActive(true);
+        StartCoroutine(FadeInVictoryMenu());
+    }
+
+    private IEnumerator FadeInVictoryMenu(){
+        victoryMenu.gameObject.SetActive(true);
+        Color c = victoryMenu.color;
+        c.a = 0;
+        victoryMenu.color = c;
+        Vector2 startPos = victoryMenu.rectTransform.anchoredPosition - new Vector2(0, 200);
+        Vector2 endPos = victoryMenu.rectTransform.anchoredPosition;
+        while(c.a < 1){
+            c.a += Time.unscaledDeltaTime * 2f;
+            victoryMenu.color = c;
+            victoryMenu.rectTransform.anchoredPosition = Vector3.Lerp(startPos, endPos, c.a);
+            yield return null;
+        }
+    }
+    
 }
 

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement; // thêm
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
-    public enum GameState { Preparing, EarlyGame, EarlyMidGame, MidGame, Final, GameOver}
+    public enum GameState { Preparing, EarlyGame, EarlyMidGame, MidGame, Final, GameOver, Victory}
     public GameState currentState;
     private GameState previousState;
 
@@ -94,6 +94,9 @@ public class GameController : MonoBehaviour
             case GameState.GameOver:
                 HandleGameOver();
                 break;
+            case GameState.Victory:
+                HandleVictory();
+                break;
         }
     }
 
@@ -105,6 +108,19 @@ public class GameController : MonoBehaviour
             progressBarController.StartProgress();
         }
         ChangeState(GameState.EarlyGame);
+    }
+
+    private void HandleVictory(){
+        if(zombieSpawner != null){
+            zombieSpawner.StopSpawning();
+        }
+        Time.timeScale = 0f;
+        AudioListener.pause = true;
+        StopAllCoroutines();
+        if(gameOverTransition != null){
+            gameOverTransition.gameObject.SetActive(true);
+            gameOverTransition.StartVictoryTransition();
+        }
     }
 
     private void StartPlaying()
@@ -163,7 +179,7 @@ public class GameController : MonoBehaviour
     {
         if (zombieSpawner != null) zombieSpawner.StartSpawning();
         StartPlaying();
-        StartCoroutine(TransitionAfterPhase(37.5f, GameState.GameOver));
+        StartCoroutine(HandleFinalState());
     }
     private void HandleGameOver()
     {
@@ -183,7 +199,7 @@ public class GameController : MonoBehaviour
     }
 
     public void OnZombieReachedEndPoint(){
-        if(currentState != GameState.GameOver){
+        if(currentState != GameState.GameOver && currentState != GameState.Victory){
             ChangeState(GameState.GameOver);
         }
     }
@@ -195,5 +211,35 @@ public class GameController : MonoBehaviour
 
     public bool IsGameOver(){
         return currentState == GameState.GameOver;
+    }
+    
+    private bool AreAllZombiesDead(){
+        Zombie[] allZombies = FindObjectsOfType<Zombie>(true);
+        foreach(Zombie zombie in allZombies){
+            if(zombie.gameObject.activeInHierarchy && !zombie.IsDead()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+  
+    private IEnumerator HandleFinalState(){
+        yield return new WaitForSeconds(37.5f);
+
+        if(zombieSpawner != null){
+            zombieSpawner.StopSpawning();
+        }
+
+        while(currentState == GameState.Final){
+            yield return new WaitForSeconds(0.5f);
+
+            if(AreAllZombiesDead()){
+                yield return new WaitForSeconds(3f);
+                ChangeState(GameState.Victory);
+                yield break;
+            }
+        }
+
     }
 }

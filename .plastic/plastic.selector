@@ -1,4 +1,4 @@
-repository "PlantsVsZombies_Clone@Tiinizh@cloud"
+repository "Cloud Repositories/PlantsVsZombies_Clone@18967512957647@cloud"
   path "/"
     br "/main"
     co "/main"

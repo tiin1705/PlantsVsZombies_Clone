@@ -32,6 +32,7 @@ public class TimeController : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.Alpha3)){
             SetSuperFastSpeed();
         }
+
     }
 
     public void SetTimeScale(float timeScale){
@@ -54,4 +55,5 @@ public class TimeController : MonoBehaviour
         SetTimeScale(superFastTimeScale);
         Debug.Log("Super Fast Speed");
     }
+    
 }
